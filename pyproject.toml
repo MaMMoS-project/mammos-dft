@@ -14,6 +14,10 @@ license-files = ["LICENSE"]
 
 requires-python = ">= 3.6"
 
+dependencies = [
+    "polars == 1.22.0",
+]
+
 [project.urls]
 Repository = "https://github.com/MaMMoS-project/mammos-dft"
 
