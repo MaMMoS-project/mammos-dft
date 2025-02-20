@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mammos-dft"
+version = "0.0.1"
+description = "Density functional theory (DFT) methods package for ab-initio calculations."
+readme = "README.md"
+authors = [
+    {name = "Andrea Petrocchi", email = "andrea.petrocchi@mpsd.mpg.de"},
+    {name = "Swapneel Amit Pathak", email = "swapneel-amit.pathak@mpsd.mpg.de"}
+]
+license-files = ["LICENSE"]
+
+requires-python = ">= 3.6"
+
+dependencies = [
+    "polars == 1.22.0",
+]
+
+[project.urls]
+Repository = "https://github.com/MaMMoS-project/mammos-dft"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mammos_dft"]
+
+[project.optional-dependencies]
+format = [
+    "ruff==0.8"
+]
+test = [
+    "pytest==8.3"
+]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+indent-width = 4
+respect-gitignore = true
+
+[tool.ruff.lint]
+select = ["D", "E4", "E7", "E9", "F", "W"] # default rules + pydocstyle + pycodestyle
+ignore = []
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 88
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.format]
+quote-style = "double"
