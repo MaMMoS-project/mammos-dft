@@ -5,7 +5,7 @@ import polars as pl
 
 CSV_PATH = Path(__file__).parent / "db.csv"
 
-def get_material_parameters(formula):
+def get_material_parameters(formula, structure=None):
     """Get information from given chemical formula.
 
     This function retrieves intrinsic properties at zero temperature
@@ -14,9 +14,13 @@ def get_material_parameters(formula):
 
     :param formula: Chemical formula
     :type formula: str
+    :param structure: Structure type
+    :type structure: str
     """
     df = pl.read_csv(CSV_PATH)
     df_filtered = df.filter(pl.col("formula")==formula)
+    if structure is not None:
+        df_filtered = df_filtered.filter(pl.col("structure")==structure)
     num_results = len(df_filtered)
     if num_results == 0:
         raise LookupError("Requested formula not found in database.")
