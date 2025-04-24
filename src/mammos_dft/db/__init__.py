@@ -1,7 +1,5 @@
 """Database-related functions."""
 
-from .tables import get_material_parameters
+from .tables import find_materials, get_intrinsic_properties
 
-__all__ = [
-    "get_material_parameters"
-]
+__all__ = ["find_materials", "get_intrinsic_properties"]
