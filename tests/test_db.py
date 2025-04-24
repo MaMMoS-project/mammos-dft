@@ -1,17 +1,47 @@
 """Test db lookup."""
 
+import numpy as np
 import pytest
 
-import mammos_dft
+from mammos_dft.db import get_intrinsic_properties
 
-def test_Ce2Fe14B():
-    Ms_0, A_0, K_0 = mammos_dft.db.get_material_parameters("Ce2Fe14B")
-    assert (Ms_0, A_0, K_0) == (0.99632415793215,4.8615622027493e-12,1189274.36002828)
+
+def test_CrNiP():
+    """Test material `CrNiP`.
+
+    There is only one material with formula `CrNiP`, so this
+    test should load its table without issues.
+    """
+    Ms_0, A_0, K_0 = get_intrinsic_properties(formula="CrNiP")
+    assert (Ms_0, K_0) == (0.83, 0.21)
+    assert np.isnan(A_0)
+
 
 def test_NdFe14B():
-    with pytest.raises(LookupError):
-        Ms_0, A_0, K_0 = mammos_dft.db.get_material_parameters("NdFe14B")
+    """Test material `NdFe14B`.
 
-def test_NdFe14B_A1():
-    Ms_0, A_0, K_0 = mammos_dft.db.get_material_parameters("NdFe14B", structure="A1")
-    assert (Ms_0, A_0, K_0) == (0.99632415793215,4.8615622027493e-12,1189274.36002828)
+    There is no material with such formula in the database,
+    so we expect a `LookupError`.
+    """
+    with pytest.raises(LookupError):
+        get_intrinsic_properties(formula="NdFe14B")
+
+
+def test_CrNiP_P1():
+    """Test material `CrNiP` with space group name `P1`.
+
+    There is no material with such formula and space group
+    in the database, so we expect a `LookupError`.
+    """
+    with pytest.raises(LookupError):
+        get_intrinsic_properties(formula="Co2Fe2H4", space_group_name="P1")
+
+
+def test_all():
+    """Test search with no filters.
+
+    This will select all entries in the database,
+    so we expect a `LookupError`.
+    """
+    with pytest.raises(LookupError):
+        get_intrinsic_properties()
