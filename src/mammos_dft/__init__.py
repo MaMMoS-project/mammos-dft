@@ -5,5 +5,5 @@ from . import ai, db, vasp
 __all__ = [
     "ai",
     "db",
-    "vasp",
+    "rspt",
 ]
