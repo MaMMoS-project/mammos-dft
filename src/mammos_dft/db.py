@@ -115,9 +115,7 @@ def get_intrinsic_properties(
         ICSD_label=ICSD_label,
         OQMD_label=OQMD_label,
     )
-
     Ms_0 = me.Ms(material.SpontaneousMagnetization)
-    # TODO unit Tesla is not okay. What to do?
     A_0 = me.A(material.ExchangeStiffnessConstant)
     Ku_0 = me.Ku(material.UniaxialAnisotropyConstant)
     return Ms_0, A_0, Ku_0
@@ -201,7 +199,6 @@ def get_intrinsic_properties_floats(
         OQMD_label=OQMD_label,
     )
     Ms_0 = me.Ms(material.SpontaneousMagnetization)
-    # TODO unit Tesla is not okay. What to do?
     A_0 = me.A(material.ExchangeStiffnessConstant)
     Ku_0 = me.Ku(material.UniaxialAnisotropyConstant)
     return Ms_0.value, A_0.value, Ku_0.value
