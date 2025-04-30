@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mammos-dft"
-version = "0.0.1"
+version = "0.0.2"
 description = "Density functional theory (DFT) methods package for ab-initio calculations."
 readme = "README.md"
 authors = [
