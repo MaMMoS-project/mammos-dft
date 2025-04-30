@@ -8,7 +8,7 @@ from textwrap import dedent
 import mammos_entity as me
 from astropy.units.quantity import Quantity # can we get this from mammos-units?
 
-CSV_PATH = Path(__file__).parent / "data" / "db.csv"
+DATA_DIR = Path(__file__).parent / "data"
 
 
 def check_short_label(short_label):
@@ -217,7 +217,7 @@ def find_materials(**kwargs):
     :rtype: pandas.DataFrame
     """
     df = pd.read_csv(
-        CSV_PATH,
+        DATA_DIR / "db.csv",
         converters={
             "chemical_formula": str,
             "space_group_name": str,
