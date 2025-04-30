@@ -5,9 +5,8 @@ import pandas as pd
 from rich import print
 import shutil
 from textwrap import dedent
-
 import mammos_entity as me
-from astropy.units.quantity import Quantity # can we get this from mammos-units?
+from astropy.units.quantity import Quantity  # can we get this from mammos-units?
 
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
@@ -237,7 +236,7 @@ def find_materials(**kwargs):
     )
     for key, value in kwargs.items():
         if value is not None:
-            if type(value) == Quantity:
+            if isinstance(value, Quantity):
                 df = df[df[key] == value.to(df[key].unit)]
             else:
                 df = df[df[key] == value]
@@ -358,7 +357,6 @@ def get_dft_output(
             DATA_DIR / material.label / file,
             outdir,
         )
-
 
 
 def describe_material(material=None, material_label=None):
