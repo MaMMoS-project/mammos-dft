@@ -16,8 +16,8 @@ license-files = ["LICENSE"]
 requires-python = ">= 3.6"
 
 dependencies = [
-    "mammos_entity @ git+https://github.com/MaMMoS-project/mammos-entity",
-    "mammos_units @ git+https://github.com/MaMMoS-project/mammos-units",
+    "mammos_entity",
+    "mammos_units",
     "pandas",
     "rich",
 ]
