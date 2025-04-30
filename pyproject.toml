@@ -16,15 +16,14 @@ license-files = ["LICENSE"]
 requires-python = ">= 3.6"
 
 dependencies = [
+    "mammos_entity @ git+https://github.com/MaMMoS-project/mammos-entity",
+    "mammos_units @ git+https://github.com/MaMMoS-project/mammos-units",
     "pandas",
     "rich",
 ]
 
 [project.urls]
 Repository = "https://github.com/MaMMoS-project/mammos-dft"
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/mammos_dft"]
 
 [project.optional-dependencies]
 format = [
@@ -37,6 +36,9 @@ example = [
     "jupyter"
 ]
 
+# hatch
+[tool.hatch.metadata]
+allow-direct-references = true
 
 # pixi
 [tool.pixi.project]
