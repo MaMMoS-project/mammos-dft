@@ -321,6 +321,48 @@ def get_cif(
     )
 
 
+def get_dft_output(
+    short_label=None,
+    chemical_formula=None,
+    space_group_name=None,
+    space_group_number=None,
+    cell_length_a=None,
+    cell_length_b=None,
+    cell_length_c=None,
+    cell_angle_alpha=None,
+    cell_angle_beta=None,
+    cell_angle_gamma=None,
+    cell_volume=None,
+    ICSD_label=None,
+    OQMD_label=None,
+    print_info=True,
+    outdir="out",
+):
+    pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
+    if short_label is not None:
+        chemical_formula, space_group_number = check_short_label(short_label)
+    material = find_unique_material(
+        print_info=print_info,
+        chemical_formula=chemical_formula,
+        space_group_name=space_group_name,
+        space_group_number=space_group_number,
+        cell_length_a=cell_length_a,
+        cell_length_b=cell_length_b,
+        cell_length_c=cell_length_c,
+        cell_angle_alpha=cell_angle_alpha,
+        cell_angle_beta=cell_angle_beta,
+        cell_angle_gamma=cell_angle_gamma,
+        cell_volume=cell_volume,
+        ICSD_label=ICSD_label,
+        OQMD_label=OQMD_label,
+    )
+    for file in "jfile", "momfile", "posfile":
+        shutil.copy(
+            DATA_DIR / material.label / file,
+            outdir,
+        )
+
+
 
 def describe_material(material=None, material_label=None):
     """Describe material in a complete way.
