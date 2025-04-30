@@ -3,6 +3,7 @@
 import pathlib
 import pandas as pd
 from rich import print
+import shutil
 from textwrap import dedent
 
 import mammos_entity as me
@@ -231,6 +232,7 @@ def find_materials(**kwargs):
             "cell_volume": Quantity,
             "ICSD_label": str,
             "OQMD_label": str,
+            "label": str,
             "SpontaneousMagnetization": Quantity,
             "ExchangeStiffnessConstant": Quantity,
             "UniaxialAnisotropyConstant": Quantity,
@@ -276,6 +278,48 @@ def find_unique_material(print_info=True, **kwargs):
             print("Found material in database.")
             print(describe_material(material))
         return material
+
+
+def get_cif(
+    short_label=None,
+    chemical_formula=None,
+    space_group_name=None,
+    space_group_number=None,
+    cell_length_a=None,
+    cell_length_b=None,
+    cell_length_c=None,
+    cell_angle_alpha=None,
+    cell_angle_beta=None,
+    cell_angle_gamma=None,
+    cell_volume=None,
+    ICSD_label=None,
+    OQMD_label=None,
+    print_info=True,
+    outdir="out",
+):
+    pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
+    if short_label is not None:
+        chemical_formula, space_group_number = check_short_label(short_label)
+    material = find_unique_material(
+        print_info=print_info,
+        chemical_formula=chemical_formula,
+        space_group_name=space_group_name,
+        space_group_number=space_group_number,
+        cell_length_a=cell_length_a,
+        cell_length_b=cell_length_b,
+        cell_length_c=cell_length_c,
+        cell_angle_alpha=cell_angle_alpha,
+        cell_angle_beta=cell_angle_beta,
+        cell_angle_gamma=cell_angle_gamma,
+        cell_volume=cell_volume,
+        ICSD_label=ICSD_label,
+        OQMD_label=OQMD_label,
+    )
+    shutil.copy(
+        DATA_DIR / material.label / "structure.cif",
+        outdir,
+    )
+
 
 
 def describe_material(material=None, material_label=None):
