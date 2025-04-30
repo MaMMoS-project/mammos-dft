@@ -1,6 +1,6 @@
 """Functions for reading tables."""
 
-from pathlib import Path
+import pathlib
 import pandas as pd
 from rich import print
 from textwrap import dedent
@@ -8,7 +8,7 @@ from textwrap import dedent
 import mammos_entity as me
 from astropy.units.quantity import Quantity # can we get this from mammos-units?
 
-DATA_DIR = Path(__file__).parent / "data"
+DATA_DIR = pathlib.Path(__file__).parent / "data"
 
 
 def check_short_label(short_label):
