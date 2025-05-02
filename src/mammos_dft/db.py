@@ -6,7 +6,7 @@ from rich import print
 import shutil
 from textwrap import dedent
 import mammos_entity as me
-from astropy.units.quantity import Quantity  # can we get this from mammos-units?
+from mammos_units import Quantity
 
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
