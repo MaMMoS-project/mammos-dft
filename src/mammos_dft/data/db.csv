@@ -1,5 +1,5 @@
 chemical_formula,space_group_name,space_group_number,cell_length_a,cell_length_b,cell_length_c,cell_angle_alpha,cell_angle_beta,cell_angle_gamma,cell_volume,ICSD_label,OQMD_label,label,SpontaneousMagnetization,ExchangeStiffnessConstant,UniaxialAnisotropyConstant
-Co2Fe2H4,P6_3/mmc,194,2.645345 AA,2.645314 AA,8.539476 AA,90 deg,90 deg,120 deg,51.751119 AA^3,,,0001,1.4957 A/m,0 J/m,2.81 MJ/m^3
-CrNiP,P-62m,189,5.84 AA,5.84 AA,3.514 AA,90 deg,90 deg,120 deg,103.79 AA^3,600596,icsd-600596,0002,0.83 A/m,0 J/m,0.21 MJ/m^3
-Y2Ti4Fe18,P4/mbm,127,8.186244 AA,8.186244 AA,4.892896 AA,90 deg,90 deg,90 deg,327.8954234 AA^3,,,0003,1.17 A/m,0 J/m,-0.39 MJ/m^3
-FeCoSi,Pnma,62,4.942 AA,3.776 AA,7.172 AA,90 deg,90 deg,90 deg,133.84 AA^3,165250,icsd-165250,0004,0.86 A/m,0 J/m,0.44 MJ/m^3
+Co2Fe2H4,P6_3/mmc,194,2.645345 AA,2.645314 AA,8.539476 AA,90 deg,90 deg,120 deg,51.751119 AA^3,,,1,1190240.2412648 A/m,nan J/m,2810000 J/m^3
+CrNiP,P-62m,189,5.84 AA,5.84 AA,3.514 AA,90 deg,90 deg,120 deg,103.79 AA^3,600596,icsd-600596,2,660493.01347181 A/m,nan J/m,210000 J/m^3
+Y2Ti4Fe18,P4/mbm,127,8.186244 AA,8.186244 AA,4.892896 AA,90 deg,90 deg,90 deg,327.8954234 AA^3,,,3,931056.41658074 A/m,nan J/m,-390000 J/m^3
+FeCoSi,Pnma,62,4.942 AA,3.776 AA,7.172 AA,90 deg,90 deg,90 deg,133.84 AA^3,165250,icsd-165250,4,684366.2549226 A/m,nan J/m,440000 J/m^3
