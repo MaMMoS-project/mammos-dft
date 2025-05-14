@@ -85,15 +85,8 @@ def get_intrinsic_properties(
     :type ICSD_label: str
     :param OQMD_label: Label in the the Open Quantum Materials Database.
     :type OQMD_label: str
-    :returns: 3-dimensional tuple with:
-
-        * `Ms_0`: spontaneous magnetisation at temperature 0K expressed in A/m.
-
-        * `A_0`: exchange stiffness constant at temperature 0K expressed in J/m.
-
-        * `K_0`: magnetocrystalline anisotropy at temperature 0K expressed in J/m^3.
-
-    :rtype: scipy.interpolate.iterp1d
+    :returns: 2-dimensional tuple (Ms_0, K1_0)
+    :rtype: (mammos_entity.Ms, mammos_entity.Ku)
     :raise ValueError: Wrong format for `short_label`.
     """
     # TODO: implement CIF parsing
@@ -115,9 +108,8 @@ def get_intrinsic_properties(
         OQMD_label=OQMD_label,
     )
     Ms_0 = me.Ms(material.SpontaneousMagnetization)
-    A_0 = me.A(material.ExchangeStiffnessConstant)
     Ku_0 = me.Ku(material.UniaxialAnisotropyConstant)
-    return Ms_0, A_0, Ku_0
+    return Ms_0, Ku_0
 
 
 def get_intrinsic_properties_floats(
@@ -169,14 +161,8 @@ def get_intrinsic_properties_floats(
     :type ICSD_label: str
     :param OQMD_label: Label in the the Open Quantum Materials Database.
     :type OQMD_label: str
-    :returns: 3-dimensional tuple with:
-
-        * `Ms_0`: spontaneous magnetisation at temperature 0K expressed in A/m.
-
-        * `A_0`: exchange stiffness constant at temperature 0K expressed in J/m.
-
-        * `K_0`: magnetocrystalline anisotropy at temperature 0K expressed in J/m^3.
-
+    :returns: 2-dimensional tuple (Ms_0, K1_0) in the ontology-standard units.
+    :rtype: (float, float)
     :rtype: scipy.interpolate.iterp1d
     :raise ValueError: Wrong format for `short_label`.
     """
@@ -198,9 +184,8 @@ def get_intrinsic_properties_floats(
         OQMD_label=OQMD_label,
     )
     Ms_0 = me.Ms(material.SpontaneousMagnetization)
-    A_0 = me.A(material.ExchangeStiffnessConstant)
     Ku_0 = me.Ku(material.UniaxialAnisotropyConstant)
-    return Ms_0.value, A_0.value, Ku_0.value
+    return Ms_0.value, Ku_0.value
 
 
 def find_materials(**kwargs):
