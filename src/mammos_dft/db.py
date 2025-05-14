@@ -293,6 +293,7 @@ def get_cif(
     print_info=True,
     outdir="out",
 ):
+    """Load cif and move it to the directory `outdir`."""
     pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
     if short_label is not None:
         chemical_formula, space_group_number = check_short_label(short_label)
@@ -334,6 +335,7 @@ def get_dft_output(
     print_info=True,
     outdir="out",
 ):
+    """Load dft output files and move them to directory `outdir`."""
     pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
     if short_label is not None:
         chemical_formula, space_group_number = check_short_label(short_label)
