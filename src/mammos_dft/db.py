@@ -6,7 +6,7 @@ from rich import print
 import shutil
 from textwrap import dedent
 import mammos_entity as me
-from mammos_units import Quantity
+import mammos_units as u
 
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
@@ -36,7 +36,7 @@ def check_short_label(short_label):
     return chemical_formula, space_group_number
 
 
-def get_intrinsic_properties(
+def get_micromagnetic_properties(
     short_label=None,
     chemical_formula=None,
     space_group_name=None,
@@ -52,11 +52,14 @@ def get_intrinsic_properties(
     OQMD_label=None,
     print_info=True,
 ):
-    """Get intrinsic properties at 0K temperature from table.
+    """Get micromagnetic intrinsic properties at 0K temperature from table.
 
-    This function retrieves intrinsic properties at zero temperature
-    given certain material information, that will be searched
-    into a local database.
+    Given certain material information, this function searches
+    and retrieves the following values from a local database:
+
+    * `Ms_0`: spontaneous magnetisation at temperature 0K expressed in A/m.
+
+    * `K_0`: magnetocrystalline anisotropy at temperature 0K expressed in J/m^3.
 
     :param short_label: Chemical formula and space group number separated by
         a hyphen "-".
@@ -204,24 +207,23 @@ def find_materials(**kwargs):
             "chemical_formula": str,
             "space_group_name": str,
             "space_group_number": int,
-            "cell_length_a": Quantity,
-            "cell_length_b": Quantity,
-            "cell_length_c": Quantity,
-            "cell_angle_alpha": Quantity,
-            "cell_angle_beta": Quantity,
-            "cell_angle_gamma": Quantity,
-            "cell_volume": Quantity,
+            "cell_length_a": u.Quantity,
+            "cell_length_b": u.Quantity,
+            "cell_length_c": u.Quantity,
+            "cell_angle_alpha": u.Quantity,
+            "cell_angle_beta": u.Quantity,
+            "cell_angle_gamma": u.Quantity,
+            "cell_volume": u.Quantity,
             "ICSD_label": str,
             "OQMD_label": str,
             "label": str,
-            "SpontaneousMagnetization": Quantity,
-            "ExchangeStiffnessConstant": Quantity,
-            "UniaxialAnisotropyConstant": Quantity,
+            "SpontaneousMagnetization": u.Quantity,
+            "UniaxialAnisotropyConstant": u.Quantity,
         },
     )
     for key, value in kwargs.items():
         if value is not None:
-            if isinstance(value, Quantity):
+            if isinstance(value, u.Quantity):
                 df = df[df[key] == value.to(df[key].unit)]
             else:
                 df = df[df[key] == value]
