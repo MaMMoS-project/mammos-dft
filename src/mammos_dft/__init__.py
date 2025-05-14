@@ -2,6 +2,4 @@
 
 from mammos_dft import db
 
-__all__ = [
-    "db"
-]
+__all__ = ["db"]
