@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from mammos_dft.db import get_intrinsic_properties
+from mammos_dft.db import get_micromagnetic_properties
 import mammos_entity as me
 
 
@@ -13,14 +13,13 @@ def test_CrNiP():
     There is only one material with formula `CrNiP`, so this
     test should load its table without issues.
     """
-    Ms_0, A_0, K1_0 = get_intrinsic_properties(
+    Ms_0, K1_0 = get_micromagnetic_properties(
         chemical_formula="CrNiP", print_info=False
     )
     Ms_true = me.Ms(660493.01347181)
     K1_true = me.Ku(210000)
     assert np.allclose(Ms_0, Ms_true)
     assert np.allclose(K1_0, K1_true)
-    assert np.isnan(A_0)
 
 
 def test_NdFe14B():
@@ -30,7 +29,7 @@ def test_NdFe14B():
     so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        get_intrinsic_properties(chemical_formula="NdFe14B")
+        get_micromagnetic_properties(chemical_formula="NdFe14B")
 
 
 def test_CrNiP_P1():
@@ -40,7 +39,7 @@ def test_CrNiP_P1():
     in the database, so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        get_intrinsic_properties(chemical_formula="Co2Fe2H4", space_group_number=12)
+        get_micromagnetic_properties(chemical_formula="Co2Fe2H4", space_group_number=12)
 
 
 def test_all():
@@ -50,4 +49,4 @@ def test_all():
     so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        get_intrinsic_properties(print_info=False)
+        get_micromagnetic_properties(print_info=False)
