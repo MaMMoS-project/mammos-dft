@@ -40,7 +40,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/be/d59db2d1d52697c6adc9eacaf50e8965b6345cc143f671e1ed068818d5cf/graphviz-0.20.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8b/c6/e127447fe5cf768ca288cc346321899d6f1ceab6856de87f82885563ea3b/mammos_entity-0.1.6-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/ee/0a/e1242b8999c0272f2bb478963a9a8ffbc4782bbc3634d93f15fec66d900a/mammos_entity-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f8/75/18cde5dcda8bf75ca84cac9101933139fb1d684807a819b3cd4659a63bbc/mammos_units-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/42/d7/1ec15b46af6af88f19b8e5ffea08fa375d433c998b8a7639e76935c14f1f/markdown_it_py-3.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl
@@ -146,7 +146,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/b1/dd/ead9d8ea85bf202d90cc513b533f9c363121c7792674f78e0d8a854b63b4/jupyterlab_pygments-0.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/54/09/2032e7d15c544a0e3cd831c51d77a8ca57f7555b2e1b2922142eddb02a84/jupyterlab_server-2.27.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/64/7a/f2479ba401e02f7fcbd3fc6af201eac888eaa188574b8e9df19452ab4972/jupyterlab_widgets-3.0.14-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8b/c6/e127447fe5cf768ca288cc346321899d6f1ceab6856de87f82885563ea3b/mammos_entity-0.1.6-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/ee/0a/e1242b8999c0272f2bb478963a9a8ffbc4782bbc3634d93f15fec66d900a/mammos_entity-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f8/75/18cde5dcda8bf75ca84cac9101933139fb1d684807a819b3cd4659a63bbc/mammos_units-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/42/d7/1ec15b46af6af88f19b8e5ffea08fa375d433c998b8a7639e76935c14f1f/markdown_it_py-3.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/0c/91/96cf928db8236f1bfab6ce15ad070dfdd02ed88261c2afafd4b43575e9e9/MarkupSafe-3.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
@@ -252,7 +252,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/be/d59db2d1d52697c6adc9eacaf50e8965b6345cc143f671e1ed068818d5cf/graphviz-0.20.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8b/c6/e127447fe5cf768ca288cc346321899d6f1ceab6856de87f82885563ea3b/mammos_entity-0.1.6-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/ee/0a/e1242b8999c0272f2bb478963a9a8ffbc4782bbc3634d93f15fec66d900a/mammos_entity-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f8/75/18cde5dcda8bf75ca84cac9101933139fb1d684807a819b3cd4659a63bbc/mammos_units-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/42/d7/1ec15b46af6af88f19b8e5ffea08fa375d433c998b8a7639e76935c14f1f/markdown_it_py-3.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl
@@ -317,7 +317,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/00/be/d59db2d1d52697c6adc9eacaf50e8965b6345cc143f671e1ed068818d5cf/graphviz-0.20.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2c/e1/e6716421ea10d38022b952c159d5161ca1193197fb744506875fbb87ea7b/iniconfig-2.1.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8b/c6/e127447fe5cf768ca288cc346321899d6f1ceab6856de87f82885563ea3b/mammos_entity-0.1.6-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/ee/0a/e1242b8999c0272f2bb478963a9a8ffbc4782bbc3634d93f15fec66d900a/mammos_entity-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f8/75/18cde5dcda8bf75ca84cac9101933139fb1d684807a819b3cd4659a63bbc/mammos_units-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/42/d7/1ec15b46af6af88f19b8e5ffea08fa375d433c998b8a7639e76935c14f1f/markdown_it_py-3.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl
@@ -1484,10 +1484,10 @@ packages:
   timestamp: 1727963148474
 - pypi: .
   name: mammos-dft
-  version: 0.1.0
-  sha256: c3682d78e321c87ab2cb54dd4fed082049d3bb68f1bc633d454439c15fb2008b
+  version: 0.1.1
+  sha256: 6e60faf298dc9513a7fa43adb3f83a15d371750313316eb38735135b2a046355
   requires_dist:
-  - mammos-entity
+  - mammos-entity>=0.2.1
   - mammos-units
   - pandas
   - rich
@@ -1496,14 +1496,14 @@ packages:
   - jupyter ; extra == 'example'
   requires_python: '>=3.6'
   editable: true
-- pypi: https://files.pythonhosted.org/packages/8b/c6/e127447fe5cf768ca288cc346321899d6f1ceab6856de87f82885563ea3b/mammos_entity-0.1.6-py3-none-any.whl
+- pypi: https://files.pythonhosted.org/packages/ee/0a/e1242b8999c0272f2bb478963a9a8ffbc4782bbc3634d93f15fec66d900a/mammos_entity-0.2.1-py3-none-any.whl
   name: mammos-entity
-  version: 0.1.6
-  sha256: 4f5ea96dde65954fa7e3ebac76d4544701069fd12c90766effda57d70f300e0e
+  version: 0.2.1
+  sha256: 1f5a2b75645b1daf0de0d1a54ab849af42ac06b11a1f547ba892fce39d11c656
   requires_dist:
   - emmontopy>=0.8,<0.9
   - mammos-units>=0.2.1
-  - numpy>=2.2.5,<3
+  - numpy<3
   requires_python: '>=3.8'
 - pypi: https://files.pythonhosted.org/packages/f8/75/18cde5dcda8bf75ca84cac9101933139fb1d684807a819b3cd4659a63bbc/mammos_units-0.2.1-py3-none-any.whl
   name: mammos-units
