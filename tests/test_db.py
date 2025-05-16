@@ -36,6 +36,7 @@ def test_Nd2Fe14B():
     assert np.allclose(Ms_0, Ms_true)
     assert np.allclose(K1_0, K1_true)
 
+
 def test_CrNiP():
     """Test material `CrNiP`.
 
