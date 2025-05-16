@@ -14,10 +14,10 @@ def test_CrNiP():
     test should load its table without issues.
     """
     Ms_0, K1_0 = get_micromagnetic_properties(
-        chemical_formula="CrNiP", print_info=False
+        chemical_formula="Co2Fe2H4", print_info=False
     )
-    Ms_true = me.Ms(660493.01347181)
-    K1_true = me.Ku(210000)
+    Ms_true = me.Ms(1190240.2412648, unit="A/m")
+    K1_true = me.Ku(2810000, unit="J/m3")
     assert np.allclose(Ms_0, Ms_true)
     assert np.allclose(K1_0, K1_true)
 
@@ -32,7 +32,7 @@ def test_NdFe14B():
         get_micromagnetic_properties(chemical_formula="NdFe14B")
 
 
-def test_CrNiP_P1():
+def test_Co2Fe2H4_12():
     """Test material `Co2Fe2H4` with space group number `12`.
 
     There is no material with such formula and space group
