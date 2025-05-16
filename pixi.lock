@@ -1484,8 +1484,8 @@ packages:
   timestamp: 1727963148474
 - pypi: .
   name: mammos-dft
-  version: 0.1.1
-  sha256: 6e60faf298dc9513a7fa43adb3f83a15d371750313316eb38735135b2a046355
+  version: 0.2.0
+  sha256: 551d2dd7326ef574a31f4c47e9912f2e5867ad50d828cff7ae5c949d9cecf0c0
   requires_dist:
   - mammos-entity>=0.2.1
   - mammos-units
