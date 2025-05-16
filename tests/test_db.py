@@ -7,10 +7,10 @@ from mammos_dft.db import get_micromagnetic_properties
 import mammos_entity as me
 
 
-def test_CrNiP():
-    """Test material `CrNiP`.
+def test_Co2Fe2H4():
+    """Test material `Co2Fe2H4`.
 
-    There is only one material with formula `CrNiP`, so this
+    There is only one material with formula `Co2Fe2H4`, so this
     test should load its table without issues.
     """
     Ms_0, K1_0 = get_micromagnetic_properties(
@@ -22,14 +22,28 @@ def test_CrNiP():
     assert np.allclose(K1_0, K1_true)
 
 
-def test_NdFe14B():
-    """Test material `NdFe14B`.
+def test_Nd2Fe14B():
+    """Test material `Nd2Fe14B`.
+
+    There is only one material with such formula in the database,
+    so we test it with the values we know to be true.
+    """
+    Ms_0, K1_0 = get_micromagnetic_properties(
+        chemical_formula="Nd2Fe14B", print_info=False
+    )
+    Ms_true = me.Ms(1280000, unit="A/m")
+    K1_true = me.Ku(4300000, unit="J/m3")
+    assert np.allclose(Ms_0, Ms_true)
+    assert np.allclose(K1_0, K1_true)
+
+def test_CrNiP():
+    """Test material `CrNiP`.
 
     There is no material with such formula in the database,
     so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        get_micromagnetic_properties(chemical_formula="NdFe14B")
+        get_micromagnetic_properties(chemical_formula="CrNiP")
 
 
 def test_Co2Fe2H4_12():
