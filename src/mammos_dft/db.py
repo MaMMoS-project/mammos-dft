@@ -5,6 +5,8 @@ import pandas as pd
 from rich import print
 import shutil
 from textwrap import dedent
+import typing
+
 import mammos_entity as me
 import mammos_units as u
 
@@ -110,9 +112,13 @@ def get_micromagnetic_properties(
         ICSD_label=ICSD_label,
         OQMD_label=OQMD_label,
     )
-    Ms_0 = me.Ms(material.SpontaneousMagnetization)
-    Ku_0 = me.Ku(material.UniaxialAnisotropyConstant)
-    return Ms_0, Ku_0
+    MicromagneticProperties = typing.NamedTuple(
+        "MicromagneticProperties", [("Ms_0", me.Entity), ("K1_0", me.Entity)]
+    )
+    return MicromagneticProperties(
+        me.Ms(material.SpontaneousMagnetization),
+        me.Ku(material.UniaxialAnisotropyConstant),
+    )
 
 
 def get_intrinsic_properties_floats(
