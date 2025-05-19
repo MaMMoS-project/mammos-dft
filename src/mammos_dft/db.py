@@ -121,7 +121,7 @@ def get_micromagnetic_properties(
     )
 
 
-def get_intrinsic_properties_floats(
+def get_micromagnetic_properties_floats(
     short_label=None,
     chemical_formula=None,
     space_group_name=None,
@@ -137,7 +137,7 @@ def get_intrinsic_properties_floats(
     OQMD_label=None,
     print_info=True,
 ):
-    """Get intrinsic properties at 0K temperature from table.
+    """Get micromagnetic intrinsic properties at 0K temperature from table.
 
     This function retrieves intrinsic properties at zero temperature
     given certain material information, that will be searched
