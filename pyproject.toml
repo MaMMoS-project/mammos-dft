@@ -32,7 +32,7 @@ format = [
 test = [
     "pytest==8.3"
 ]
-example = [
+examples = [
     "jupyter"
 ]
 
@@ -52,7 +52,7 @@ mammos-dft = { path = ".", editable = true }
 default = { solve-group = "default" }
 format = { features = ["format"], solve-group = "default" }
 test = { features = ["test"], solve-group = "default" }
-example = { features = ["example"], solve-group = "default" }
+examples = { features = ["examples"], solve-group = "default" }
 
 [tool.pixi.tasks]
 clean = "rm -rf .ruff_cache .pytest_cache"
@@ -64,8 +64,8 @@ lint = "ruff check"
 [tool.pixi.feature.test.tasks]
 test = "pytest -v"
 
-[tool.pixi.feature.example.tasks]
-example = "jupyter-lab examples/database.ipynb"
+[tool.pixi.feature.examples.tasks]
+examples = "jupyter-lab examples/"
 
 # ruff
 [tool.ruff]
