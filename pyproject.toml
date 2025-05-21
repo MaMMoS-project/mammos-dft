@@ -9,11 +9,12 @@ description = "Density functional theory (DFT) methods package for ab-initio cal
 readme = "README.md"
 authors = [
     {name = "Andrea Petrocchi", email = "andrea.petrocchi@mpsd.mpg.de"},
-    {name = "Swapneel Amit Pathak", email = "swapneel-amit.pathak@mpsd.mpg.de"}
+    {name = "Swapneel Amit Pathak", email = "swapneel-amit.pathak@mpsd.mpg.de"},
+    {name = "Martin Lang", email = "martin.lang@mpsd.mpg.de"}
 ]
 license-files = ["LICENSE"]
 
-requires-python = ">= 3.6"
+requires-python = ">= 3.10"
 
 dependencies = [
     "mammos_entity >=0.2.1",
@@ -69,7 +70,7 @@ example = "jupyter-lab examples/database.ipynb"
 
 # ruff
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
 line-length = 88
 indent-width = 4
 respect-gitignore = true
@@ -82,7 +83,7 @@ ignore = []
 max-doc-length = 88
 
 [tool.ruff.lint.pydocstyle]
-convention = "pep257"
+convention = "google"
 
 [tool.ruff.format]
 quote-style = "double"
