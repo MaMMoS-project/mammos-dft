@@ -63,7 +63,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/5c/23/c7abc0ca0a1526a0774eca151daeb8de62ec457e77262b66b359c3c7679e/tzdata-2025.2-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/6b/11/cc635220681e93a0183390e26485430ca2c7b5f9d33b15c74c2861cb8091/urllib3-2.4.0-py3-none-any.whl
       - pypi: .
-  example:
+  examples:
     channels:
     - url: https://conda.anaconda.org/conda-forge/
     indexes:
@@ -192,7 +192,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/57/17/7343ea3ec906ee8c2b64a956d702de5067e0058b5d2869fbfb4b11625112/rpds_py-0.25.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/a6/24/4d91e05817e92e3a61c8a21e08fd0f390f5301f1c448b137c57c4bc6e543/semver-3.0.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/40/b0/4562db6223154aa4e22f939003cb92514c79f3d4dccca3444253fd17f902/Send2Trash-1.8.3-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/a1/18/0e835c3a557dc5faffc8f91092f62fc337c1dab1066715842e7a4b318ec4/setuptools-80.7.1-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/58/29/93c53c098d301132196c3238c312825324740851d77a8500a2462c0fd888/setuptools-80.8.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e9/44/75a9c9421471a6c4805dbf2356f7c181a29c1879239abab1ea2cc8f38b40/sniffio-1.3.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e7/9c/0e6afc12c269578be5c0c1c9f4b49a8d32770a080260c333ac04cc1c832d/soupsieve-2.7-py3-none-any.whl
@@ -1487,8 +1487,8 @@ packages:
   timestamp: 1727963148474
 - pypi: .
   name: mammos-dft
-  version: 0.2.1
-  sha256: 99971ce9a1c55f6bf594e231f9d6f5a9369fcb93eee584c1ca44e3772a9c6be5
+  version: 0.2.2
+  sha256: fc8ef9e1e48a2884ac24d455b98796ab143a9d38496d8b5ccb5b992f79ea14ff
   requires_dist:
   - mammos-entity>=0.2.1
   - mammos-units
@@ -1496,7 +1496,7 @@ packages:
   - rich
   - ruff==0.8 ; extra == 'format'
   - pytest==8.3 ; extra == 'test'
-  - jupyter ; extra == 'example'
+  - jupyter ; extra == 'examples'
   requires_python: '>=3.6'
   editable: true
 - pypi: https://files.pythonhosted.org/packages/31/df/d2e197f083c40bb5b44e1d1324f36d08bb4720b879a2aef595c6e5bdc914/mammos_entity-0.2.2-py3-none-any.whl
@@ -2200,10 +2200,10 @@ packages:
   - pyobjc-framework-cocoa ; sys_platform == 'darwin' and extra == 'objc'
   - pywin32 ; sys_platform == 'win32' and extra == 'win32'
   requires_python: '>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*'
-- pypi: https://files.pythonhosted.org/packages/a1/18/0e835c3a557dc5faffc8f91092f62fc337c1dab1066715842e7a4b318ec4/setuptools-80.7.1-py3-none-any.whl
+- pypi: https://files.pythonhosted.org/packages/58/29/93c53c098d301132196c3238c312825324740851d77a8500a2462c0fd888/setuptools-80.8.0-py3-none-any.whl
   name: setuptools
-  version: 80.7.1
-  sha256: ca5cc1069b85dc23070a6628e6bcecb3292acac802399c7f8edc0100619f9009
+  version: 80.8.0
+  sha256: 95a60484590d24103af13b686121328cc2736bee85de8936383111e421b9edc0
   requires_dist:
   - pytest>=6,!=8.1.* ; extra == 'test'
   - virtualenv>=13.0.0 ; extra == 'test'
