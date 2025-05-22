@@ -5,7 +5,6 @@ import pandas as pd
 from rich import print
 import shutil
 from textwrap import dedent
-import typing
 from pydantic import ConfigDict
 from pydantic.dataclasses import dataclass
 
