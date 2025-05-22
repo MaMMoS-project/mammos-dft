@@ -1514,7 +1514,7 @@ packages:
 - pypi: ./
   name: mammos-dft
   version: 0.2.2
-  sha256: 0114b3cfd7335b276c817b74e0f0f8e6b968d58870b39846b268d8dc39cff437
+  sha256: 20111c163c4e8783a099514be08dabf6b1b61c9eac6297e4e62367d199f05086
   requires_dist:
   - mammos-entity>=0.2.1
   - mammos-units

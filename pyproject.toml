@@ -12,6 +12,7 @@ authors = [
     {name = "Swapneel Amit Pathak", email = "swapneel-amit.pathak@mpsd.mpg.de"},
     {name = "Martin Lang", email = "martin.lang@mpsd.mpg.de"}
 ]
+license = "MIT"
 license-files = ["LICENSE"]
 
 requires-python = ">= 3.11"
