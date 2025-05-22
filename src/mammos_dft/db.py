@@ -13,15 +13,19 @@ import mammos_units as u
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
 
-def check_short_label(short_label):
+def check_short_label(short_label: str) -> tuple[str, int]:
     """Check that short label follows the standards and returns material parameters.
 
-    :param short_label: Short label containing chemical formula and space group
-        number separated by a hyphen.
-    :type short_label: str
-    :raises ValueError: Wrong format.
-    :return: Chemical formula and space group number.
-    :rtype: (str,int)
+    Args:
+        short_label: Short label containing chemical formula and space group
+            number separated by a hyphen.
+
+    Returns:
+        Chemical formula and space group number.
+
+    Raises:
+        ValueError: Wrong format.
+
     """
     short_label_list = short_label.split("-")
     if len(short_label_list) != 2:
@@ -38,22 +42,36 @@ def check_short_label(short_label):
     return chemical_formula, space_group_number
 
 
+# TODO add documentation
+class MicromagneticProperties(typing.NamedTuple):
+    """Result object containing micromagnetic properties.
+
+    Args:
+        Ms_0: Saturation magnetisation at T=0K.
+        K1_0: Uniaxial anisotropy constant K1 at T=0K.
+
+    """
+
+    Ms_0: me.Entity
+    K1_0: me.Entity
+
+
 def get_micromagnetic_properties(
-    short_label=None,
-    chemical_formula=None,
-    space_group_name=None,
-    space_group_number=None,
-    cell_length_a=None,
-    cell_length_b=None,
-    cell_length_c=None,
-    cell_angle_alpha=None,
-    cell_angle_beta=None,
-    cell_angle_gamma=None,
-    cell_volume=None,
-    ICSD_label=None,
-    OQMD_label=None,
-    print_info=True,
-):
+    short_label: str | None = None,
+    chemical_formula: str | None = None,
+    space_group_name: str | None = None,
+    space_group_number: int | None = None,
+    cell_length_a: float | None = None,
+    cell_length_b: float | None = None,
+    cell_length_c: float | None = None,
+    cell_angle_alpha: float | None = None,
+    cell_angle_beta: float | None = None,
+    cell_angle_gamma: float | None = None,
+    cell_volume: float | None = None,
+    ICSD_label: str | None = None,
+    OQMD_label: str | None = None,
+    print_info: bool = True,
+) -> MicromagneticProperties:
     """Get micromagnetic intrinsic properties at 0K temperature from table.
 
     Given certain material information, this function searches
@@ -63,36 +81,28 @@ def get_micromagnetic_properties(
 
     * `K_0`: magnetocrystalline anisotropy at temperature 0K expressed in J/m^3.
 
-    :param short_label: Chemical formula and space group number separated by
-        a hyphen "-".
-    :type short_label: str
-    :param chemical_formula: Chemical formula.
-    :type chemical_formula: str
-    :param space_group_name: Space group name.
-    :type space_group_name: str
-    :param space_group_number: Space group number.
-    :type space_group_number: int
-    :param cell_length_a: Cell length a.
-    :type cell_length_a: float
-    :param cell_length_b: Cell length b.
-    :type cell_length_b: float
-    :param cell_length_c: Cell length c.
-    :type cell_length_c: float
-    :param cell_angle_alpha: Cell angle alpha.
-    :type cell_angle_alpha: float
-    :param cell_angle_beta: Cell angle beta.
-    :type cell_angle_beta: float
-    :param cell_angle_gamma: Cell angle gamma.
-    :type cell_angle_gamma: float
-    :param cell_volume: Cell volume.
-    :type cell_volume: float
-    :param ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
-    :type ICSD_label: str
-    :param OQMD_label: Label in the the Open Quantum Materials Database.
-    :type OQMD_label: str
-    :returns: 2-dimensional tuple (Ms_0, K1_0)
-    :rtype: (mammos_entity.Ms, mammos_entity.Ku)
-    :raise ValueError: Wrong format for `short_label`.
+    Args:
+        short_label: Chemical formula and space group number separated by a hyphen "-".
+        chemical_formula: Chemical formula.
+        space_group_name: Space group name.
+        space_group_number: Space group number.
+        cell_length_a: Cell length a.
+        cell_length_b: Cell length b.
+        cell_length_c: Cell length c.
+        cell_angle_alpha: Cell angle alpha.
+        cell_angle_beta: Cell angle beta.
+        cell_angle_gamma: Cell angle gamma.
+        cell_volume: Cell volume.
+        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
+        OQMD_label: Label in the the Open Quantum Materials Database.
+        print_info: Print info
+
+    Returns:
+        Saturation magnetisation and uniaxial anisotropy at T=0.
+
+    Raises:
+        ValueError: Wrong format for `short_label`.
+
     """
     # TODO: implement CIF parsing
     if short_label is not None:
@@ -112,9 +122,6 @@ def get_micromagnetic_properties(
         ICSD_label=ICSD_label,
         OQMD_label=OQMD_label,
     )
-    MicromagneticProperties = typing.NamedTuple(
-        "MicromagneticProperties", [("Ms_0", me.Entity), ("K1_0", me.Entity)]
-    )
     return MicromagneticProperties(
         me.Ms(material.SpontaneousMagnetization),
         me.Ku(material.UniaxialAnisotropyConstant),
@@ -122,58 +129,46 @@ def get_micromagnetic_properties(
 
 
 def get_micromagnetic_properties_floats(
-    short_label=None,
-    chemical_formula=None,
-    space_group_name=None,
-    space_group_number=None,
-    cell_length_a=None,
-    cell_length_b=None,
-    cell_length_c=None,
-    cell_angle_alpha=None,
-    cell_angle_beta=None,
-    cell_angle_gamma=None,
-    cell_volume=None,
-    ICSD_label=None,
-    OQMD_label=None,
-    print_info=True,
-):
+    short_label: str | None = None,
+    chemical_formula: str | None = None,
+    space_group_name: str | None = None,
+    space_group_number: int | None = None,
+    cell_length_a: float | None = None,
+    cell_length_b: float | None = None,
+    cell_length_c: float | None = None,
+    cell_angle_alpha: float | None = None,
+    cell_angle_beta: float | None = None,
+    cell_angle_gamma: float | None = None,
+    cell_volume: float | None = None,
+    ICSD_label: str | None = None,
+    OQMD_label: str | None = None,
+    print_info: bool = True,
+) -> tuple[float, float]:
     """Get micromagnetic intrinsic properties at 0K temperature from table.
 
     This function retrieves intrinsic properties at zero temperature
     given certain material information, that will be searched
     into a local database.
 
-    :param short_label: Chemical formula and space group number separated by
-        a hyphen "-".
-    :type short_label: str
-    :param chemical_formula: Chemical formula.
-    :type chemical_formula: str
-    :param space_group_name: Space group name.
-    :type space_group_name: str
-    :param space_group_number: Space group number.
-    :type space_group_number: int
-    :param cell_length_a: Cell length a.
-    :type cell_length_a: float
-    :param cell_length_b: Cell length b.
-    :type cell_length_b: float
-    :param cell_length_c: Cell length c.
-    :type cell_length_c: float
-    :param cell_angle_alpha: Cell angle alpha.
-    :type cell_angle_alpha: float
-    :param cell_angle_beta: Cell angle beta.
-    :type cell_angle_beta: float
-    :param cell_angle_gamma: Cell angle gamma.
-    :type cell_angle_gamma: float
-    :param cell_volume: Cell volume.
-    :type cell_volume: float
-    :param ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
-    :type ICSD_label: str
-    :param OQMD_label: Label in the the Open Quantum Materials Database.
-    :type OQMD_label: str
-    :returns: 2-dimensional tuple (Ms_0, K1_0) in the ontology-standard units.
-    :rtype: (float, float)
-    :rtype: scipy.interpolate.iterp1d
-    :raise ValueError: Wrong format for `short_label`.
+    Args:
+        short_label: Chemical formula and space group number separated by a hyphen "-".
+        chemical_formula: Chemical formula.
+        space_group_name: Space group name.
+        space_group_number: Space group number.
+        cell_length_a: Cell length a.
+        cell_length_b: Cell length b.
+        cell_length_c: Cell length c.
+        cell_angle_alpha: Cell angle alpha.
+        cell_angle_beta: Cell angle beta.
+        cell_angle_gamma: Cell angle gamma.
+        cell_volume: Cell volume.
+        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
+        OQMD_label: Label in the the Open Quantum Materials Database.
+        print_info: Print info
+
+    Returns:
+        2-dimensional tuple (Ms_0, K1_0) in the ontology-standard units.
+
     """
     if short_label is not None:
         chemical_formula, space_group_number = check_short_label(short_label)
@@ -197,15 +192,18 @@ def get_micromagnetic_properties_floats(
     return Ms_0.value, Ku_0.value
 
 
-def find_materials(**kwargs):
+def find_materials(**kwargs) -> pd.DataFrame:
     """Find materials in database.
 
     This function retrieves one or known materials from the database
     `db.csv` by filtering for any requirements given in **kwargs.
 
-    :returns: Dataframe containing materials with requested qualities.
-        Possibly empty.
-    :rtype: pandas.DataFrame
+    Args:
+        **kwargs: Selection criteria.
+
+    Returns:
+        Dataframe containing materials with requested qualities. Possibly empty.
+
     """
     df = pd.read_csv(
         DATA_DIR / "db.csv",
@@ -236,18 +234,24 @@ def find_materials(**kwargs):
     return df
 
 
-def find_unique_material(print_info=True, **kwargs):
+def find_unique_material(print_info: bool = True, **kwargs) -> pd.DataFrame:
     """Find unique material in database.
 
     This function retrieves one material from the database
     `db.csv` by filtering for any requirements given in **kwargs.
     If no or more than one materials are found, an error is raised.
 
-    :returns: Dataframe containing materials with requested qualities.
-        Possibly empty.
-    :rtype: pandas.DataFrame
-    :raises LookupError: Requested material not found in database.
-    :raises LookupError: Too many results.
+    Args:
+        print_info: Show detailed info.
+        **kwargs: Filter criteria.
+
+    Returns:
+        Dataframe containing materials with requested qualities. Possibly empty.
+
+    Raises:
+        LookupError: Requested material not found in database.
+        LookupError: Too many results.
+
     """
     df = find_materials(**kwargs)
     num_results = len(df)
@@ -270,23 +274,42 @@ def find_unique_material(print_info=True, **kwargs):
 
 
 def get_cif(
-    short_label=None,
-    chemical_formula=None,
-    space_group_name=None,
-    space_group_number=None,
-    cell_length_a=None,
-    cell_length_b=None,
-    cell_length_c=None,
-    cell_angle_alpha=None,
-    cell_angle_beta=None,
-    cell_angle_gamma=None,
-    cell_volume=None,
-    ICSD_label=None,
-    OQMD_label=None,
-    print_info=True,
-    outdir="out",
-):
-    """Load cif and move it to the directory `outdir`."""
+    short_label: str | None = None,
+    chemical_formula: str | None = None,
+    space_group_name: str | None = None,
+    space_group_number: int | None = None,
+    cell_length_a: float | None = None,
+    cell_length_b: float | None = None,
+    cell_length_c: float | None = None,
+    cell_angle_alpha: float | None = None,
+    cell_angle_beta: float | None = None,
+    cell_angle_gamma: float | None = None,
+    cell_volume: float | None = None,
+    ICSD_label: str | None = None,
+    OQMD_label: str | None = None,
+    print_info: bool = True,
+    outdir: str | pathlib.Path = "out",
+) -> None:
+    """Load cif and move it to the directory `outdir`.
+
+    Args:
+        short_label: Chemical formula and space group number separated by a hyphen "-".
+        chemical_formula: Chemical formula.
+        space_group_name: Space group name.
+        space_group_number: Space group number.
+        cell_length_a: Cell length a.
+        cell_length_b: Cell length b.
+        cell_length_c: Cell length c.
+        cell_angle_alpha: Cell angle alpha.
+        cell_angle_beta: Cell angle beta.
+        cell_angle_gamma: Cell angle gamma.
+        cell_volume: Cell volume.
+        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
+        OQMD_label: Label in the the Open Quantum Materials Database.
+        print_info: Print info
+        outdir: Output directory
+
+    """
     pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
     if short_label is not None:
         chemical_formula, space_group_number = check_short_label(short_label)
@@ -312,23 +335,42 @@ def get_cif(
 
 
 def get_dft_output(
-    short_label=None,
-    chemical_formula=None,
-    space_group_name=None,
-    space_group_number=None,
-    cell_length_a=None,
-    cell_length_b=None,
-    cell_length_c=None,
-    cell_angle_alpha=None,
-    cell_angle_beta=None,
-    cell_angle_gamma=None,
-    cell_volume=None,
-    ICSD_label=None,
-    OQMD_label=None,
-    print_info=True,
-    outdir="out",
-):
-    """Load dft output files and move them to directory `outdir`."""
+    short_label: str | None = None,
+    chemical_formula: str | None = None,
+    space_group_name: str | None = None,
+    space_group_number: int | None = None,
+    cell_length_a: float | None = None,
+    cell_length_b: float | None = None,
+    cell_length_c: float | None = None,
+    cell_angle_alpha: float | None = None,
+    cell_angle_beta: float | None = None,
+    cell_angle_gamma: float | None = None,
+    cell_volume: float | None = None,
+    ICSD_label: str | None = None,
+    OQMD_label: str | None = None,
+    print_info: bool = True,
+    outdir: str | pathlib.Path = "out",
+) -> None:
+    """Load dft output files and move them to directory `outdir`.
+
+    Args:
+        short_label: Chemical formula and space group number separated by a hyphen "-".
+        chemical_formula: Chemical formula.
+        space_group_name: Space group name.
+        space_group_number: Space group number.
+        cell_length_a: Cell length a.
+        cell_length_b: Cell length b.
+        cell_length_c: Cell length c.
+        cell_angle_alpha: Cell angle alpha.
+        cell_angle_beta: Cell angle beta.
+        cell_angle_gamma: Cell angle gamma.
+        cell_volume: Cell volume.
+        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
+        OQMD_label: Label in the the Open Quantum Materials Database.
+        print_info: Print info
+        outdir: Output directory
+
+    """
     pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
     if short_label is not None:
         chemical_formula, space_group_number = check_short_label(short_label)
@@ -354,21 +396,24 @@ def get_dft_output(
         )
 
 
-def describe_material(material=None, material_label=None):
+def describe_material(
+    material: pd.DataFrame | None = None, material_label: str | None = None
+) -> str:
     """Describe material in a complete way.
 
     This function returns a string listing the properties of the given material
     or the given material label.
 
-    :param material: Material dataframe containing structure information.
-        Defaults to `None`.
-    :type material: pandas.core.frame.DataFrame
-    :param material_label: Label of material in local database.
-        Defaults to `None`.
-    :type material_label: str
-    :return: Well-formatted material information.
-    :rtype: str
-    :raise ValueError: Material and material label cannot be both empty.
+    Args:
+        material: Material dataframe containing structure information.
+        material_label: Label of material in local database.
+
+    Returns:
+        Description of the material
+
+    Raises:
+        ValueError: If `material` and `material_label` are both ``None``.
+
     """
     if material is None and material_label is None:
         raise ValueError("Material and material label cannot be both empty.")
