@@ -6,6 +6,7 @@ from rich import print
 import shutil
 from textwrap import dedent
 import typing
+from pydantic import ConfigDict
 from pydantic.dataclasses import dataclass
 
 import mammos_entity as me
