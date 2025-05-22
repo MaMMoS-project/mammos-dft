@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_call:
 
+env:
+  PYTEST_ADDOPTS: "--color=yes"
+
 jobs:
   test:
     runs-on: ubuntu-latest
