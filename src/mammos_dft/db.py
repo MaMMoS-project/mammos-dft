@@ -6,6 +6,7 @@ from rich import print
 import shutil
 from textwrap import dedent
 import typing
+from pydantic.dataclasses import dataclass
 
 import mammos_entity as me
 import mammos_units as u
@@ -42,8 +43,8 @@ def check_short_label(short_label: str) -> tuple[str, int]:
     return chemical_formula, space_group_number
 
 
-# TODO add documentation
-class MicromagneticProperties(typing.NamedTuple):
+@dataclass(frozen=True, config=ConfigDict(arbitrary_types_allowed=True))
+class MicromagneticProperties:
     """Result object containing micromagnetic properties.
 
     Args:
