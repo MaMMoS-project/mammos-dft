@@ -27,4 +27,4 @@ TODO
 
 ## Acknowledgements
 
-This software has been supported by the European Union’s Horizon Europe research and innovation programme under grant agreement No 101135546 MaMMoS.
+This software has been supported by the European Union’s Horizon Europe research and innovation programme under grant agreement No 101135546 [MaMMoS](https://mammos-project.github.io/).
