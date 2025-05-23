@@ -71,7 +71,7 @@ def get_micromagnetic_properties(
     cell_volume: float | None = None,
     ICSD_label: str | None = None,
     OQMD_label: str | None = None,
-    print_info: bool = True,
+    print_info: bool = False,
 ) -> MicromagneticProperties:
     """Get micromagnetic intrinsic properties at 0K temperature from table.
 
@@ -143,7 +143,7 @@ def get_micromagnetic_properties_floats(
     cell_volume: float | None = None,
     ICSD_label: str | None = None,
     OQMD_label: str | None = None,
-    print_info: bool = True,
+    print_info: bool = False,
 ) -> tuple[float, float]:
     """Get micromagnetic intrinsic properties at 0K temperature from table.
 
@@ -235,7 +235,7 @@ def find_materials(**kwargs) -> pd.DataFrame:
     return df
 
 
-def find_unique_material(print_info: bool = True, **kwargs) -> pd.DataFrame:
+def find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
     """Find unique material in database.
 
     This function retrieves one material from the database
@@ -288,7 +288,7 @@ def get_cif(
     cell_volume: float | None = None,
     ICSD_label: str | None = None,
     OQMD_label: str | None = None,
-    print_info: bool = True,
+    print_info: bool = False,
     outdir: str | pathlib.Path = "out",
 ) -> None:
     """Load cif and move it to the directory `outdir`.
@@ -349,7 +349,7 @@ def get_dft_output(
     cell_volume: float | None = None,
     ICSD_label: str | None = None,
     OQMD_label: str | None = None,
-    print_info: bool = True,
+    print_info: bool = False,
     outdir: str | pathlib.Path = "out",
 ) -> None:
     """Load dft output files and move them to directory `outdir`.
