@@ -1,5 +1,5 @@
-MaMMoS-DFT tutorials
-====================
+mammos-dft
+==========
 
 .. toctree::
    :maxdepth: 1
