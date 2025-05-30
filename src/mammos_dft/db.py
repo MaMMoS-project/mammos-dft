@@ -14,7 +14,7 @@ import mammos_units as u
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
 
-def check_short_label(short_label: str) -> tuple[str, int]:
+def _check_short_label(short_label: str) -> tuple[str, int]:
     """Check that short label follows the standards and returns material parameters.
 
     Args:
@@ -104,7 +104,7 @@ def get_micromagnetic_properties(
 
     """
     # TODO: implement CIF parsing
-    material = find_unique_material(
+    material = _find_unique_material(
         print_info=print_info,
         chemical_formula=chemical_formula,
         space_group_name=space_group_name,
@@ -167,7 +167,7 @@ def find_materials(**kwargs) -> pd.DataFrame:
     return df
 
 
-def find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
+def _find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
     """Find unique material in database.
 
     This function retrieves one material from the database
@@ -196,17 +196,17 @@ def find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
             + "Avilable materials based on request:\n"
         )
         for row, material in df.iterrows():
-            error_string += describe_material(material)
+            error_string += _describe_material(material)
         raise LookupError(error_string)
     else:
         material = df.iloc[0]
         if print_info:
             print("Found material in database.")
-            print(describe_material(material))
+            print(_describe_material(material))
         return material
 
 
-def get_cif(
+def _get_cif(
     short_label: str | None = None,
     chemical_formula: str | None = None,
     space_group_name: str | None = None,
@@ -245,8 +245,8 @@ def get_cif(
     """
     pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
     if short_label is not None:
-        chemical_formula, space_group_number = check_short_label(short_label)
-    material = find_unique_material(
+        chemical_formula, space_group_number = _check_short_label(short_label)
+    material = _find_unique_material(
         print_info=print_info,
         chemical_formula=chemical_formula,
         space_group_name=space_group_name,
@@ -267,7 +267,7 @@ def get_cif(
     )
 
 
-def get_dft_output(
+def _get_dft_output(
     short_label: str | None = None,
     chemical_formula: str | None = None,
     space_group_name: str | None = None,
@@ -306,8 +306,8 @@ def get_dft_output(
     """
     pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
     if short_label is not None:
-        chemical_formula, space_group_number = check_short_label(short_label)
-    material = find_unique_material(
+        chemical_formula, space_group_number = _check_short_label(short_label)
+    material = _find_unique_material(
         print_info=print_info,
         chemical_formula=chemical_formula,
         space_group_name=space_group_name,
@@ -329,7 +329,7 @@ def get_dft_output(
         )
 
 
-def describe_material(
+def _describe_material(
     material: pd.DataFrame | None = None, material_label: str | None = None
 ) -> str:
     """Describe material in a complete way.
