@@ -58,7 +58,6 @@ class MicromagneticProperties:
 
 
 def get_micromagnetic_properties(
-    short_label: str | None = None,
     chemical_formula: str | None = None,
     space_group_name: str | None = None,
     space_group_number: int | None = None,
@@ -83,7 +82,6 @@ def get_micromagnetic_properties(
     * `K_0`: magnetocrystalline anisotropy at temperature 0K expressed in J/m^3.
 
     Args:
-        short_label: Chemical formula and space group number separated by a hyphen "-".
         chemical_formula: Chemical formula.
         space_group_name: Space group name.
         space_group_number: Space group number.
@@ -106,8 +104,6 @@ def get_micromagnetic_properties(
 
     """
     # TODO: implement CIF parsing
-    if short_label is not None:
-        chemical_formula, space_group_number = check_short_label(short_label)
     material = find_unique_material(
         print_info=print_info,
         chemical_formula=chemical_formula,
@@ -127,70 +123,6 @@ def get_micromagnetic_properties(
         me.Ms(material.SpontaneousMagnetization),
         me.Ku(material.UniaxialAnisotropyConstant),
     )
-
-
-def get_micromagnetic_properties_floats(
-    short_label: str | None = None,
-    chemical_formula: str | None = None,
-    space_group_name: str | None = None,
-    space_group_number: int | None = None,
-    cell_length_a: float | None = None,
-    cell_length_b: float | None = None,
-    cell_length_c: float | None = None,
-    cell_angle_alpha: float | None = None,
-    cell_angle_beta: float | None = None,
-    cell_angle_gamma: float | None = None,
-    cell_volume: float | None = None,
-    ICSD_label: str | None = None,
-    OQMD_label: str | None = None,
-    print_info: bool = False,
-) -> tuple[float, float]:
-    """Get micromagnetic intrinsic properties at 0K temperature from table.
-
-    This function retrieves intrinsic properties at zero temperature
-    given certain material information, that will be searched
-    into a local database.
-
-    Args:
-        short_label: Chemical formula and space group number separated by a hyphen "-".
-        chemical_formula: Chemical formula.
-        space_group_name: Space group name.
-        space_group_number: Space group number.
-        cell_length_a: Cell length a.
-        cell_length_b: Cell length b.
-        cell_length_c: Cell length c.
-        cell_angle_alpha: Cell angle alpha.
-        cell_angle_beta: Cell angle beta.
-        cell_angle_gamma: Cell angle gamma.
-        cell_volume: Cell volume.
-        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
-        OQMD_label: Label in the the Open Quantum Materials Database.
-        print_info: Print info
-
-    Returns:
-        2-dimensional tuple (Ms_0, K1_0) in the ontology-standard units.
-
-    """
-    if short_label is not None:
-        chemical_formula, space_group_number = check_short_label(short_label)
-    material = find_unique_material(
-        print_info=print_info,
-        chemical_formula=chemical_formula,
-        space_group_name=space_group_name,
-        space_group_number=space_group_number,
-        cell_length_a=cell_length_a,
-        cell_length_b=cell_length_b,
-        cell_length_c=cell_length_c,
-        cell_angle_alpha=cell_angle_alpha,
-        cell_angle_beta=cell_angle_beta,
-        cell_angle_gamma=cell_angle_gamma,
-        cell_volume=cell_volume,
-        ICSD_label=ICSD_label,
-        OQMD_label=OQMD_label,
-    )
-    Ms_0 = me.Ms(material.SpontaneousMagnetization)
-    Ku_0 = me.Ku(material.UniaxialAnisotropyConstant)
-    return Ms_0.value, Ku_0.value
 
 
 def find_materials(**kwargs) -> pd.DataFrame:
