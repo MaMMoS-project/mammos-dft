@@ -1,5 +1,5 @@
 # mammos-dft
-Density functional theory (DFT) methods package for ab-initio calculations.
+Density functional theory (DFT) package for ab-initio calculations.
 
 | Description   | Badge                                                                                                                                                                                  |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
