@@ -1,10 +1,10 @@
 """Test db lookup."""
 
+import mammos_entity as me
 import numpy as np
 import pytest
 
 from mammos_dft.db import get_micromagnetic_properties
-import mammos_entity as me
 
 
 def test_Co2Fe2H4():

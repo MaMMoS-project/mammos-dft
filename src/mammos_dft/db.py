@@ -1,15 +1,15 @@
 """Functions for reading tables."""
 
 import pathlib
-import pandas as pd
-from rich import print
 import shutil
 from textwrap import dedent
-from pydantic import ConfigDict
-from pydantic.dataclasses import dataclass
 
 import mammos_entity as me
 import mammos_units as u
+import pandas as pd
+from pydantic import ConfigDict
+from pydantic.dataclasses import dataclass
+from rich import print
 
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
@@ -102,6 +102,10 @@ def get_micromagnetic_properties(
     Raises:
         ValueError: Wrong format for `short_label`.
 
+    Examples:
+        >>> import mammos_dft.db
+        >>> mammos_dft.db.get_micromagnetic_properties("Nd2Fe14B")
+        MicromagneticProperties(Ms_0=..., K1_0=...)
     """
     # TODO: implement CIF parsing
     material = _find_unique_material(
@@ -195,7 +199,7 @@ def _find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
             "Too many results. Please refine your search.\n"
             + "Avilable materials based on request:\n"
         )
-        for row, material in df.iterrows():
+        for _row, material in df.iterrows():
             error_string += _describe_material(material)
         raise LookupError(error_string)
     else:
