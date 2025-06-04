@@ -45,16 +45,12 @@ def _check_short_label(short_label: str) -> tuple[str, int]:
 
 @dataclass(frozen=True, config=ConfigDict(arbitrary_types_allowed=True))
 class MicromagneticProperties:
-    """Result object containing micromagnetic properties.
-
-    Args:
-        Ms_0: Saturation magnetisation at T=0K.
-        K1_0: Uniaxial anisotropy constant K1 at T=0K.
-
-    """
+    """Result object containing micromagnetic properties."""
 
     Ms_0: me.Entity
+    """Saturation magnetisation at T=0K."""
     K1_0: me.Entity
+    """Uniaxial anisotropy constant K1 at T=0K."""
 
 
 def get_micromagnetic_properties(
@@ -133,10 +129,10 @@ def find_materials(**kwargs) -> pd.DataFrame:
     """Find materials in database.
 
     This function retrieves one or known materials from the database
-    `db.csv` by filtering for any requirements given in **kwargs.
+    `db.csv` by filtering for any requirements given in `kwargs`.
 
     Args:
-        **kwargs: Selection criteria.
+        kwargs: Selection criteria.
 
     Returns:
         Dataframe containing materials with requested qualities. Possibly empty.
