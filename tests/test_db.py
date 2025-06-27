@@ -1,7 +1,6 @@
 """Test db lookup."""
 
 import mammos_entity as me
-import numpy as np
 import pytest
 
 from mammos_dft.db import get_micromagnetic_properties
@@ -18,8 +17,8 @@ def test_Co2Fe2H4():
     )
     Ms_true = me.Ms(1190240.2412648, unit="A/m")
     K1_true = me.Ku(2810000, unit="J/m3")
-    assert np.allclose(properties.Ms_0, Ms_true)
-    assert np.allclose(properties.K1_0, K1_true)
+    assert Ms_true == properties.Ms_0
+    assert K1_true == properties.K1_0
 
 
 def test_Nd2Fe14B():
@@ -33,8 +32,8 @@ def test_Nd2Fe14B():
     )
     Ms_true = me.Ms(1280000, unit="A/m")
     K1_true = me.Ku(4300000, unit="J/m3")
-    assert np.allclose(properties.Ms_0, Ms_true)
-    assert np.allclose(properties.K1_0, K1_true)
+    assert Ms_true == properties.Ms_0
+    assert K1_true == properties.K1_0
 
 
 def test_CrNiP():
