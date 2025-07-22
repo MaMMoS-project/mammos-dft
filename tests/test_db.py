@@ -16,9 +16,9 @@ def test_Co2Fe2H4():
         chemical_formula="Co2Fe2H4", print_info=False
     )
     Ms_true = me.Ms(1190240.2412648, unit="A/m")
-    K1_true = me.Ku(2810000, unit="J/m3")
+    Ku_true = me.Ku(2810000, unit="J/m3")
     assert Ms_true == properties.Ms_0
-    assert K1_true == properties.K1_0
+    assert Ku_true == properties.Ku_0
 
 
 def test_Nd2Fe14B():
@@ -31,9 +31,9 @@ def test_Nd2Fe14B():
         chemical_formula="Nd2Fe14B", print_info=False
     )
     Ms_true = me.Ms(1280000, unit="A/m")
-    K1_true = me.Ku(4300000, unit="J/m3")
+    Ku_true = me.Ku(4300000, unit="J/m3")
     assert Ms_true == properties.Ms_0
-    assert K1_true == properties.K1_0
+    assert Ku_true == properties.Ku_0
 
 
 def test_CrNiP():
