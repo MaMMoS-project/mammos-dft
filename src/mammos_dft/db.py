@@ -49,7 +49,7 @@ class MicromagneticProperties:
 
     Ms_0: me.Entity
     """Saturation magnetisation at T=0K."""
-    K1_0: me.Entity
+    Ku_0: me.Entity
     """Uniaxial anisotropy constant K1 at T=0K."""
 
 
@@ -101,7 +101,7 @@ def get_micromagnetic_properties(
     Examples:
         >>> import mammos_dft.db
         >>> mammos_dft.db.get_micromagnetic_properties("Nd2Fe14B")
-        MicromagneticProperties(Ms_0=..., K1_0=...)
+        MicromagneticProperties(Ms_0=..., Ku_0=...)
     """
     # TODO: implement CIF parsing
     material = _find_unique_material(
