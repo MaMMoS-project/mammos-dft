@@ -6,6 +6,13 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [mammos-dft 0.3.3](https://github.com/MaMMoS-project/mammos-dft/tree/0.3.3) – 2025-12-10
+
+### Misc
+
+- Materials Fe3Y and Fe2.33Ta0.67Y were added to the database. ([#39](https://github.com/MaMMoS-project/mammos-dft/pull/39))
+
+
 ## [mammos-dft 0.3.2](https://github.com/MaMMoS-project/mammos-dft/tree/0.3.2) – 2025-08-13
 
 ### Fixed
