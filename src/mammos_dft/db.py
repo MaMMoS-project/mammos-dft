@@ -1,15 +1,23 @@
 """Functions for reading tables."""
 
+from __future__ import annotations
+
 import pathlib
 import shutil
+from pathlib import Path
 from textwrap import dedent
+from typing import TYPE_CHECKING
 
+import ase.io
 import mammos_entity as me
 import mammos_units as u
 import pandas as pd
 from pydantic import ConfigDict
 from pydantic.dataclasses import dataclass
 from rich import print
+
+if TYPE_CHECKING:
+    import numpy as np
 
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
@@ -41,6 +49,64 @@ def _check_short_label(short_label: str) -> tuple[str, int]:
     chemical_formula = short_label_list[0]
     space_group_number = int(short_label_list[1])
     return chemical_formula, space_group_number
+
+
+class UppasdProperties:
+    """Result object containing inputs for UppASD."""
+
+    def __init__(self, material_metadata: pd.DataFrame):
+        """Create properties object from metadata dataframe."""
+        self._dataframe = material_metadata
+        self._base_dir = DATA_DIR / material_metadata.label
+        if not self._base_dir.is_dir():
+            raise RuntimeError(
+                "No UppASD input data available for "
+                + material_metadata.chemical_formula
+            )
+
+    def __repr__(self) -> str:
+        """Short representation only containing the material name."""
+        return f"UppasdProperties({self._dataframe.chemical_formula})"
+
+    @property
+    def exchange(self) -> Path:
+        """Path to file containing exchange coupling constants Jij."""
+        return self._base_dir / "exchange"
+
+    @property
+    def maptype(self) -> int:
+        """Type of exchange coupling file."""
+        return 2
+
+    @property
+    def momfile(self) -> Path:
+        """Path to momfile for UppASD."""
+        return self._base_dir / "momfile"
+
+    @property
+    def posfile(self) -> Path:
+        """Path to posfile for UppASD."""
+        return self._base_dir / "posfile"
+
+    @property
+    def posfiletype(self) -> str:
+        """Type of posfile as expected by UppASD; can be 'C' or 'D'."""
+        return "D"
+
+    @property
+    def cell(self) -> np.ndarray:
+        """Unit cell vectors from cif file."""
+        return ase.io.read(self._base_dir / "structure.cif").cell.array
+
+
+def get_uppasd_properties(chemical_formula: str) -> UppasdProperties:
+    """Return an object containing inputs required for UppASD.
+
+    The returned object provides access to files exchange, posfile and momfile, and
+    their types.
+    """
+    material = _find_unique_material(chemical_formula=chemical_formula)
+    return UppasdProperties(material)
 
 
 @dataclass(frozen=True, config=ConfigDict(arbitrary_types_allowed=True))

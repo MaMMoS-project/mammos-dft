@@ -3,7 +3,7 @@
 import mammos_entity as me
 import pytest
 
-from mammos_dft.db import get_micromagnetic_properties
+from mammos_dft import db
 
 
 def test_Co2Fe2H4():
@@ -12,7 +12,7 @@ def test_Co2Fe2H4():
     There is only one material with formula `Co2Fe2H4`, so this
     test should load its table without issues.
     """
-    properties = get_micromagnetic_properties(
+    properties = db.get_micromagnetic_properties(
         chemical_formula="Co2Fe2H4", print_info=False
     )
     Ms_true = me.Ms(1190240.2412648, unit="A/m")
@@ -27,7 +27,7 @@ def test_Nd2Fe14B():
     There is only one material with such formula in the database,
     so we test it with the values we know to be true.
     """
-    properties = get_micromagnetic_properties(
+    properties = db.get_micromagnetic_properties(
         chemical_formula="Nd2Fe14B", print_info=False
     )
     Ms_true = me.Ms(1280000, unit="A/m")
@@ -43,7 +43,7 @@ def test_CrNiP():
     so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        get_micromagnetic_properties(chemical_formula="CrNiP")
+        db.get_micromagnetic_properties(chemical_formula="CrNiP")
 
 
 def test_Co2Fe2H4_12():
@@ -53,7 +53,9 @@ def test_Co2Fe2H4_12():
     in the database, so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        get_micromagnetic_properties(chemical_formula="Co2Fe2H4", space_group_number=12)
+        db.get_micromagnetic_properties(
+            chemical_formula="Co2Fe2H4", space_group_number=12
+        )
 
 
 def test_all():
@@ -63,4 +65,23 @@ def test_all():
     so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        get_micromagnetic_properties(print_info=False)
+        db.get_micromagnetic_properties(print_info=False)
+
+
+def test_uppasd_inputs():
+    """Check existence of UppASD inputs for all materials in database."""
+    missing_data = ["Nd2Fe14B"]
+    for material in db.find_materials().chemical_formula:
+        if material in missing_data:
+            with pytest.raises(RuntimeError, match="No UppASD input data available"):
+                db.get_uppasd_properties(material)
+            continue
+
+        inputs = db.get_uppasd_properties(material)
+
+        assert inputs.exchange.exists()
+        assert inputs.posfile.exists()
+        assert inputs.momfile.exists()
+        assert inputs.maptype in [1, 2]
+        assert inputs.posfiletype in ["C", "D"]
+        assert inputs.cell.shape == (3, 3)
