@@ -54,7 +54,7 @@ def _check_short_label(short_label: str) -> tuple[str, int]:
 class UppasdProperties:
     """Result object containing inputs for UppASD."""
 
-    def __init__(self, material_metadata: pd.DataFrame):
+    def __init__(self, material_metadata: pd.Series):
         """Create properties object from metadata dataframe."""
         self._dataframe = material_metadata
         self._base_dir = DATA_DIR / material_metadata.label
@@ -233,7 +233,7 @@ def find_materials(**kwargs) -> pd.DataFrame:
     return df
 
 
-def _find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
+def _find_unique_material(print_info: bool = False, **kwargs) -> pd.Series:
     """Find unique material in database.
 
     This function retrieves one material from the database
