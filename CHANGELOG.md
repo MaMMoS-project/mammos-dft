@@ -6,6 +6,13 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [mammos-dft 0.4.0](https://github.com/MaMMoS-project/mammos-dft/tree/0.4.0) – 2025-12-15
+
+### Added
+
+- A new function `mammos_dft.db.get_uppasd_properties` to get inputs required for UppASD from the database. ([#41](https://github.com/MaMMoS-project/mammos-dft/pull/41))
+
+
 ## [mammos-dft 0.3.3](https://github.com/MaMMoS-project/mammos-dft/tree/0.3.3) – 2025-12-10
 
 ### Misc
