@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pathlib
-import shutil
 from pathlib import Path
 from textwrap import dedent
 from typing import TYPE_CHECKING
@@ -270,129 +269,6 @@ def _find_unique_material(print_info: bool = False, **kwargs) -> pd.Series:
             print("Found material in database.")
             print(_describe_material(material))
         return material
-
-
-def _get_cif(
-    short_label: str | None = None,
-    chemical_formula: str | None = None,
-    space_group_name: str | None = None,
-    space_group_number: int | None = None,
-    cell_length_a: float | None = None,
-    cell_length_b: float | None = None,
-    cell_length_c: float | None = None,
-    cell_angle_alpha: float | None = None,
-    cell_angle_beta: float | None = None,
-    cell_angle_gamma: float | None = None,
-    cell_volume: float | None = None,
-    ICSD_label: str | None = None,
-    OQMD_label: str | None = None,
-    print_info: bool = False,
-    outdir: str | pathlib.Path = "out",
-) -> None:
-    """Load cif and move it to the directory `outdir`.
-
-    Args:
-        short_label: Chemical formula and space group number separated by a hyphen "-".
-        chemical_formula: Chemical formula.
-        space_group_name: Space group name.
-        space_group_number: Space group number.
-        cell_length_a: Cell length a.
-        cell_length_b: Cell length b.
-        cell_length_c: Cell length c.
-        cell_angle_alpha: Cell angle alpha.
-        cell_angle_beta: Cell angle beta.
-        cell_angle_gamma: Cell angle gamma.
-        cell_volume: Cell volume.
-        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
-        OQMD_label: Label in the the Open Quantum Materials Database.
-        print_info: Print info
-        outdir: Output directory
-
-    """
-    pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
-    if short_label is not None:
-        chemical_formula, space_group_number = _check_short_label(short_label)
-    material = _find_unique_material(
-        print_info=print_info,
-        chemical_formula=chemical_formula,
-        space_group_name=space_group_name,
-        space_group_number=space_group_number,
-        cell_length_a=cell_length_a,
-        cell_length_b=cell_length_b,
-        cell_length_c=cell_length_c,
-        cell_angle_alpha=cell_angle_alpha,
-        cell_angle_beta=cell_angle_beta,
-        cell_angle_gamma=cell_angle_gamma,
-        cell_volume=cell_volume,
-        ICSD_label=ICSD_label,
-        OQMD_label=OQMD_label,
-    )
-    shutil.copy(
-        DATA_DIR / material.label / "structure.cif",
-        outdir,
-    )
-
-
-def _get_dft_output(
-    short_label: str | None = None,
-    chemical_formula: str | None = None,
-    space_group_name: str | None = None,
-    space_group_number: int | None = None,
-    cell_length_a: float | None = None,
-    cell_length_b: float | None = None,
-    cell_length_c: float | None = None,
-    cell_angle_alpha: float | None = None,
-    cell_angle_beta: float | None = None,
-    cell_angle_gamma: float | None = None,
-    cell_volume: float | None = None,
-    ICSD_label: str | None = None,
-    OQMD_label: str | None = None,
-    print_info: bool = False,
-    outdir: str | pathlib.Path = "out",
-) -> None:
-    """Load dft output files and move them to directory `outdir`.
-
-    Args:
-        short_label: Chemical formula and space group number separated by a hyphen "-".
-        chemical_formula: Chemical formula.
-        space_group_name: Space group name.
-        space_group_number: Space group number.
-        cell_length_a: Cell length a.
-        cell_length_b: Cell length b.
-        cell_length_c: Cell length c.
-        cell_angle_alpha: Cell angle alpha.
-        cell_angle_beta: Cell angle beta.
-        cell_angle_gamma: Cell angle gamma.
-        cell_volume: Cell volume.
-        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
-        OQMD_label: Label in the the Open Quantum Materials Database.
-        print_info: Print info
-        outdir: Output directory
-
-    """
-    pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
-    if short_label is not None:
-        chemical_formula, space_group_number = _check_short_label(short_label)
-    material = _find_unique_material(
-        print_info=print_info,
-        chemical_formula=chemical_formula,
-        space_group_name=space_group_name,
-        space_group_number=space_group_number,
-        cell_length_a=cell_length_a,
-        cell_length_b=cell_length_b,
-        cell_length_c=cell_length_c,
-        cell_angle_alpha=cell_angle_alpha,
-        cell_angle_beta=cell_angle_beta,
-        cell_angle_gamma=cell_angle_gamma,
-        cell_volume=cell_volume,
-        ICSD_label=ICSD_label,
-        OQMD_label=OQMD_label,
-    )
-    for file in "jfile", "momfile", "posfile":
-        shutil.copy(
-            DATA_DIR / material.label / file,
-            outdir,
-        )
 
 
 def _describe_material(
