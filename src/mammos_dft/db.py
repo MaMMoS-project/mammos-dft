@@ -1,15 +1,22 @@
 """Functions for reading tables."""
 
-import pathlib
-import shutil
-from textwrap import dedent
+from __future__ import annotations
 
+import pathlib
+from pathlib import Path
+from textwrap import dedent
+from typing import TYPE_CHECKING
+
+import ase.io
 import mammos_entity as me
 import mammos_units as u
 import pandas as pd
 from pydantic import ConfigDict
 from pydantic.dataclasses import dataclass
 from rich import print
+
+if TYPE_CHECKING:
+    import numpy as np
 
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
@@ -41,6 +48,64 @@ def _check_short_label(short_label: str) -> tuple[str, int]:
     chemical_formula = short_label_list[0]
     space_group_number = int(short_label_list[1])
     return chemical_formula, space_group_number
+
+
+class UppasdProperties:
+    """Result object containing inputs for UppASD."""
+
+    def __init__(self, material_metadata: pd.Series):
+        """Create properties object from metadata dataframe."""
+        self._dataframe = material_metadata
+        self._base_dir = DATA_DIR / material_metadata.label
+        if not self._base_dir.is_dir():
+            raise RuntimeError(
+                "No UppASD input data available for "
+                + material_metadata.chemical_formula
+            )
+
+    def __repr__(self) -> str:
+        """Short representation only containing the material name."""
+        return f"UppasdProperties({self._dataframe.chemical_formula})"
+
+    @property
+    def exchange(self) -> Path:
+        """Path to file containing exchange coupling constants Jij."""
+        return self._base_dir / "exchange"
+
+    @property
+    def maptype(self) -> int:
+        """Type of exchange coupling file."""
+        return 2
+
+    @property
+    def momfile(self) -> Path:
+        """Path to momfile for UppASD."""
+        return self._base_dir / "momfile"
+
+    @property
+    def posfile(self) -> Path:
+        """Path to posfile for UppASD."""
+        return self._base_dir / "posfile"
+
+    @property
+    def posfiletype(self) -> str:
+        """Type of posfile as expected by UppASD; can be 'C' or 'D'."""
+        return "D"
+
+    @property
+    def cell(self) -> np.ndarray:
+        """Unit cell vectors from cif file."""
+        return ase.io.read(self._base_dir / "structure.cif").cell.array
+
+
+def get_uppasd_properties(chemical_formula: str) -> UppasdProperties:
+    """Return an object containing inputs required for UppASD.
+
+    The returned object provides access to files exchange, posfile and momfile, and
+    their types.
+    """
+    material = _find_unique_material(chemical_formula=chemical_formula)
+    return UppasdProperties(material)
 
 
 @dataclass(frozen=True, config=ConfigDict(arbitrary_types_allowed=True))
@@ -167,7 +232,7 @@ def find_materials(**kwargs) -> pd.DataFrame:
     return df
 
 
-def _find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
+def _find_unique_material(print_info: bool = False, **kwargs) -> pd.Series:
     """Find unique material in database.
 
     This function retrieves one material from the database
@@ -204,129 +269,6 @@ def _find_unique_material(print_info: bool = False, **kwargs) -> pd.DataFrame:
             print("Found material in database.")
             print(_describe_material(material))
         return material
-
-
-def _get_cif(
-    short_label: str | None = None,
-    chemical_formula: str | None = None,
-    space_group_name: str | None = None,
-    space_group_number: int | None = None,
-    cell_length_a: float | None = None,
-    cell_length_b: float | None = None,
-    cell_length_c: float | None = None,
-    cell_angle_alpha: float | None = None,
-    cell_angle_beta: float | None = None,
-    cell_angle_gamma: float | None = None,
-    cell_volume: float | None = None,
-    ICSD_label: str | None = None,
-    OQMD_label: str | None = None,
-    print_info: bool = False,
-    outdir: str | pathlib.Path = "out",
-) -> None:
-    """Load cif and move it to the directory `outdir`.
-
-    Args:
-        short_label: Chemical formula and space group number separated by a hyphen "-".
-        chemical_formula: Chemical formula.
-        space_group_name: Space group name.
-        space_group_number: Space group number.
-        cell_length_a: Cell length a.
-        cell_length_b: Cell length b.
-        cell_length_c: Cell length c.
-        cell_angle_alpha: Cell angle alpha.
-        cell_angle_beta: Cell angle beta.
-        cell_angle_gamma: Cell angle gamma.
-        cell_volume: Cell volume.
-        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
-        OQMD_label: Label in the the Open Quantum Materials Database.
-        print_info: Print info
-        outdir: Output directory
-
-    """
-    pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
-    if short_label is not None:
-        chemical_formula, space_group_number = _check_short_label(short_label)
-    material = _find_unique_material(
-        print_info=print_info,
-        chemical_formula=chemical_formula,
-        space_group_name=space_group_name,
-        space_group_number=space_group_number,
-        cell_length_a=cell_length_a,
-        cell_length_b=cell_length_b,
-        cell_length_c=cell_length_c,
-        cell_angle_alpha=cell_angle_alpha,
-        cell_angle_beta=cell_angle_beta,
-        cell_angle_gamma=cell_angle_gamma,
-        cell_volume=cell_volume,
-        ICSD_label=ICSD_label,
-        OQMD_label=OQMD_label,
-    )
-    shutil.copy(
-        DATA_DIR / material.label / "structure.cif",
-        outdir,
-    )
-
-
-def _get_dft_output(
-    short_label: str | None = None,
-    chemical_formula: str | None = None,
-    space_group_name: str | None = None,
-    space_group_number: int | None = None,
-    cell_length_a: float | None = None,
-    cell_length_b: float | None = None,
-    cell_length_c: float | None = None,
-    cell_angle_alpha: float | None = None,
-    cell_angle_beta: float | None = None,
-    cell_angle_gamma: float | None = None,
-    cell_volume: float | None = None,
-    ICSD_label: str | None = None,
-    OQMD_label: str | None = None,
-    print_info: bool = False,
-    outdir: str | pathlib.Path = "out",
-) -> None:
-    """Load dft output files and move them to directory `outdir`.
-
-    Args:
-        short_label: Chemical formula and space group number separated by a hyphen "-".
-        chemical_formula: Chemical formula.
-        space_group_name: Space group name.
-        space_group_number: Space group number.
-        cell_length_a: Cell length a.
-        cell_length_b: Cell length b.
-        cell_length_c: Cell length c.
-        cell_angle_alpha: Cell angle alpha.
-        cell_angle_beta: Cell angle beta.
-        cell_angle_gamma: Cell angle gamma.
-        cell_volume: Cell volume.
-        ICSD_label: Label in the NIST Inorganic Crystal Structure Database.
-        OQMD_label: Label in the the Open Quantum Materials Database.
-        print_info: Print info
-        outdir: Output directory
-
-    """
-    pathlib.Path(outdir).mkdir(exist_ok=True, parents=True)
-    if short_label is not None:
-        chemical_formula, space_group_number = _check_short_label(short_label)
-    material = _find_unique_material(
-        print_info=print_info,
-        chemical_formula=chemical_formula,
-        space_group_name=space_group_name,
-        space_group_number=space_group_number,
-        cell_length_a=cell_length_a,
-        cell_length_b=cell_length_b,
-        cell_length_c=cell_length_c,
-        cell_angle_alpha=cell_angle_alpha,
-        cell_angle_beta=cell_angle_beta,
-        cell_angle_gamma=cell_angle_gamma,
-        cell_volume=cell_volume,
-        ICSD_label=ICSD_label,
-        OQMD_label=OQMD_label,
-    )
-    for file in "jfile", "momfile", "posfile":
-        shutil.copy(
-            DATA_DIR / material.label / file,
-            outdir,
-        )
 
 
 def _describe_material(

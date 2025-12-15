@@ -25,6 +25,7 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
+  "ase",
   "mammos-entity>=0.8.0",
   "mammos-units",
   "pandas",
