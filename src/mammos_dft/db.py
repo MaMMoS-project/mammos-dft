@@ -75,7 +75,7 @@ class UppasdProperties:
     @property
     def maptype(self) -> int:
         """Type of exchange coupling file."""
-        return 2
+        return self._dataframe.maptype
 
     @property
     def momfile(self) -> Path:
@@ -90,7 +90,7 @@ class UppasdProperties:
     @property
     def posfiletype(self) -> str:
         """Type of posfile as expected by UppASD; can be 'C' or 'D'."""
-        return "D"
+        return self._dataframe.posfiletype
 
     @property
     def cell(self) -> np.ndarray:
@@ -219,6 +219,8 @@ def find_materials(**kwargs) -> pd.DataFrame:
             "ICSD_label": str,
             "OQMD_label": str,
             "label": str,
+            "posfiletype": str,
+            "maptype": int,
             "SpontaneousMagnetization": u.Quantity,
             "UniaxialAnisotropyConstant": u.Quantity,
         },
