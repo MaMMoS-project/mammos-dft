@@ -5,4 +5,4 @@ dependencies:
   - python=3.11
   - pip
   - pip:
-      - mammos-dft==0.4.0
+      - mammos-dft==0.4.1

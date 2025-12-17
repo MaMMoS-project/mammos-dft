@@ -6,6 +6,13 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [mammos-dft 0.4.1](https://github.com/MaMMoS-project/mammos-dft/tree/0.4.1) – 2025-12-17
+
+### Misc
+
+- The values of posfiletype and maptype were added to the databases. ([#43](https://github.com/MaMMoS-project/mammos-dft/pull/43))
+
+
 ## [mammos-dft 0.4.0](https://github.com/MaMMoS-project/mammos-dft/tree/0.4.0) – 2025-12-15
 
 ### Added
