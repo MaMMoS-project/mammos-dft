@@ -56,7 +56,7 @@ class UppasdProperties:
     def __init__(self, material_metadata: pd.Series):
         """Create properties object from metadata dataframe."""
         self._dataframe = material_metadata
-        self._base_dir = DATA_DIR / material_metadata.label
+        self._base_dir = DATA_DIR / material_metadata.chemical_formula
         if not self._base_dir.is_dir():
             raise RuntimeError(
                 "No UppASD input data available for "
@@ -218,7 +218,6 @@ def find_materials(**kwargs) -> pd.DataFrame:
             "cell_volume": u.Quantity,
             "ICSD_label": str,
             "OQMD_label": str,
-            "label": str,
             "posfiletype": str,
             "maptype": int,
             "SpontaneousMagnetization": u.Quantity,
@@ -274,7 +273,7 @@ def _find_unique_material(print_info: bool = False, **kwargs) -> pd.Series:
 
 
 def _describe_material(
-    material: pd.DataFrame | None = None, material_label: str | None = None
+    material: pd.DataFrame | None = None, chemical_formula: str | None = None
 ) -> str:
     """Describe material in a complete way.
 
@@ -283,7 +282,7 @@ def _describe_material(
 
     Args:
         material: Material dataframe containing structure information.
-        material_label: Label of material in local database.
+        chemical_formula: Chemical formula of material in local database.
 
     Returns:
         Description of the material
@@ -292,11 +291,11 @@ def _describe_material(
         ValueError: If `material` and `material_label` are both ``None``.
 
     """
-    if material is None and material_label is None:
-        raise ValueError("Material and material label cannot be both empty.")
-    elif material_label is not None:
+    if material is None and chemical_formula is None:
+        raise ValueError("Material and chemical formula cannot be both empty.")
+    elif chemical_formula is not None:
         df = find_materials()
-        material = df[df["label"] == material_label].iloc[0]
+        material = df[df["chemical_formula"] == chemical_formula].iloc[0]
     return dedent(
         f"""
             Chemical Formula: {material.chemical_formula}
