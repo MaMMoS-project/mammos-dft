@@ -165,7 +165,7 @@ def get_micromagnetic_properties(
 
     Examples:
         >>> import mammos_dft.db
-        >>> mammos_dft.db.get_micromagnetic_properties("Nd2Fe14B")
+        >>> mammos_dft.db.get_micromagnetic_properties("Fe16N2")
         MicromagneticProperties(Ms_0=..., Ku_0=...)
     """
     # TODO: implement CIF parsing
