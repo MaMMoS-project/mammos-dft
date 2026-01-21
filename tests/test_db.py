@@ -21,17 +21,17 @@ def test_Co2Fe2H4():
     assert Ku_true == properties.Ku_0
 
 
-def test_Nd2Fe14B():
-    """Test material `Nd2Fe14B`.
+def test_Fe16N2():
+    """Test material `Fe16N2`.
 
     There is only one material with such formula in the database,
     so we test it with the values we know to be true.
     """
     properties = db.get_micromagnetic_properties(
-        chemical_formula="Nd2Fe14B", print_info=False
+        chemical_formula="Fe16N2", print_info=False
     )
-    Ms_true = me.Ms(1280000, unit="A/m")
-    Ku_true = me.Ku(4300000, unit="J/m3")
+    Ms_true = me.Ms(1671126.902464901, unit="A/m")
+    Ku_true = me.Ku(1100000, unit="J/m3")
     assert Ms_true == properties.Ms_0
     assert Ku_true == properties.Ku_0
 
@@ -70,13 +70,7 @@ def test_all():
 
 def test_uppasd_inputs():
     """Check existence of UppASD inputs for all materials in database."""
-    missing_data = ["Nd2Fe14B"]
     for material in db.find_materials().chemical_formula:
-        if material in missing_data:
-            with pytest.raises(RuntimeError, match="No UppASD input data available"):
-                db.get_uppasd_properties(material)
-            continue
-
         inputs = db.get_uppasd_properties(material)
 
         assert inputs.exchange.exists()
