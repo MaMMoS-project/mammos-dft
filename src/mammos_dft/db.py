@@ -16,7 +16,8 @@ from pydantic.dataclasses import dataclass
 from rich import print
 
 if TYPE_CHECKING:
-    import numpy as np
+    import numpy
+    import pandas
 
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 
@@ -53,7 +54,7 @@ def _check_short_label(short_label: str) -> tuple[str, int]:
 class UppasdProperties:
     """Result object containing inputs for UppASD."""
 
-    def __init__(self, material_metadata: pd.Series):
+    def __init__(self, material_metadata: pandas.Series):
         """Create properties object from metadata dataframe."""
         self._dataframe = material_metadata
         self._base_dir = DATA_DIR / material_metadata.label
@@ -93,7 +94,7 @@ class UppasdProperties:
         return self._dataframe.posfiletype
 
     @property
-    def cell(self) -> np.ndarray:
+    def cell(self) -> numpy.ndarray:
         """Unit cell vectors from cif file."""
         return ase.io.read(self._base_dir / "structure.cif").cell.array
 
@@ -190,7 +191,7 @@ def get_micromagnetic_properties(
     )
 
 
-def find_materials(**kwargs) -> pd.DataFrame:
+def find_materials(**kwargs) -> pandas.DataFrame:
     """Find materials in database.
 
     This function retrieves one or known materials from the database
@@ -234,7 +235,7 @@ def find_materials(**kwargs) -> pd.DataFrame:
     return df
 
 
-def _find_unique_material(print_info: bool = False, **kwargs) -> pd.Series:
+def _find_unique_material(print_info: bool = False, **kwargs) -> pandas.Series:
     """Find unique material in database.
 
     This function retrieves one material from the database
@@ -274,7 +275,7 @@ def _find_unique_material(print_info: bool = False, **kwargs) -> pd.Series:
 
 
 def _describe_material(
-    material: pd.DataFrame | None = None, material_label: str | None = None
+    material: pandas.DataFrame | None = None, material_label: str | None = None
 ) -> str:
     """Describe material in a complete way.
 
