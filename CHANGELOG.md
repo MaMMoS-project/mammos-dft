@@ -6,6 +6,22 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [mammos-dft 0.5.0](https://github.com/MaMMoS-project/mammos-dft/tree/0.5.0) – 2026-03-06
+
+### Added
+
+- Added material Y2Ti4Fe18 to database. ([#56](https://github.com/MaMMoS-project/mammos-dft/pull/56))
+
+### Changed
+
+- Added source in the database of all calculations. ([#46](https://github.com/MaMMoS-project/mammos-dft/pull/46))
+
+### Misc
+
+- Updated local database: Renamed directories as chemical formulas, reduced decimal digits. ([#47](https://github.com/MaMMoS-project/mammos-dft/pull/47))
+- Material Nd2Fe14B has been removed from the database. ([#49](https://github.com/MaMMoS-project/mammos-dft/pull/49))
+
+
 ## [mammos-dft 0.4.1](https://github.com/MaMMoS-project/mammos-dft/tree/0.4.1) – 2025-12-17
 
 ### Misc
