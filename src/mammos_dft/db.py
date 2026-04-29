@@ -11,11 +11,10 @@ import ase.io
 import mammos_entity as me
 import mammos_units as u
 import pandas as pd
-from pydantic import ConfigDict
-from pydantic.dataclasses import dataclass
 from rich import print
 
 if TYPE_CHECKING:
+    import mammos_entity
     import numpy
     import pandas
 
@@ -109,14 +108,32 @@ def get_uppasd_properties(chemical_formula: str) -> UppasdProperties:
     return UppasdProperties(material)
 
 
-@dataclass(frozen=True, config=ConfigDict(arbitrary_types_allowed=True))
-class MicromagneticProperties:
-    """Result object containing micromagnetic properties."""
+@me._entity_collection.frozen_collection
+class MicromagneticProperties(me.EntityCollection):
+    """Result object containing micromagnetic properties.
 
-    Ms_0: me.Entity
-    """Saturation magnetisation at T=0K."""
-    Ku_0: me.Entity
-    """Uniaxial anisotropy constant K1 at T=0K."""
+    Stores the saturation magnetisation and uniaxial anisotropy constant
+    at zero temperature.
+    """
+
+    def __init__(
+        self,
+        Ms_0: mammos_entity.Entity,
+        Ku_0: mammos_entity.Entity,
+        description: str = "",
+    ) -> None:
+        """Initialize MicromagneticProperties.
+
+        Args:
+            Ms_0: Saturation magnetisation at T=0K as
+                :entity:`SpontaneousMagnetization`.
+            Ku_0: Uniaxial anisotropy constant K1 at T=0K as
+                :entity:`UniaxialAnisotropyConstant`.
+            description: Description of the collection.
+        """
+        me._entity.ensure_entity("SpontaneousMagnetization", Ms_0=Ms_0)
+        me._entity.ensure_entity("UniaxialAnisotropyConstant", Ku_0=Ku_0)
+        super().__init__(description=description, Ms_0=Ms_0, Ku_0=Ku_0)
 
 
 def get_micromagnetic_properties(
