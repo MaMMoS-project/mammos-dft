@@ -29,7 +29,6 @@ dependencies = [
   "mammos-entity>=0.8.0",
   "mammos-units",
   "pandas",
-  "pydantic",
   "rich",
 ]
 
