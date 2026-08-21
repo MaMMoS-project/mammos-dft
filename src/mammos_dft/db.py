@@ -177,7 +177,11 @@ def get_micromagnetic_properties(
     Examples:
         >>> import mammos_dft.db
         >>> mammos_dft.db.get_micromagnetic_properties("Fe16N2")
-        MicromagneticProperties(Ms_0=..., Ku_0=...)
+        MicromagneticProperties(
+            description='',
+            Ms_0=Entity(ontology_label='SpontaneousMagnetization', value=np.float64(1671127.0), unit='A / m'),
+            Ku_0=Entity(ontology_label='UniaxialAnisotropyConstant', value=np.float64(1100000.0), unit='J / m3'),
+        )
     """
     # TODO: implement CIF parsing
     material = _find_unique_material(
