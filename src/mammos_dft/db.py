@@ -58,10 +58,7 @@ class UppasdProperties:
         self._dataframe = material_metadata
         self._base_dir = DATA_DIR / material_metadata.chemical_formula
         if not self._base_dir.is_dir():
-            raise RuntimeError(
-                "No UppASD input data available for "
-                + material_metadata.chemical_formula
-            )
+            raise RuntimeError("No UppASD input data available for " + material_metadata.chemical_formula)
 
     def __repr__(self) -> str:
         """Short representation only containing the material name."""
@@ -241,10 +238,7 @@ def find_materials(**kwargs) -> pandas.DataFrame:
     )
     for key, value in kwargs.items():
         if value is not None:
-            if isinstance(value, u.Quantity):
-                df = df[df[key] == value.to(df[key].unit)]
-            else:
-                df = df[df[key] == value]
+            df = df[df[key] == value.to(df[key].unit)] if isinstance(value, u.Quantity) else df[df[key] == value]
     return df
 
 
@@ -272,10 +266,7 @@ def _find_unique_material(print_info: bool = False, **kwargs) -> pandas.Series:
     if num_results == 0:
         raise LookupError("Requested material not found in database.")
     elif num_results > 1:  # list all possible choice
-        error_string = (
-            "Too many results. Please refine your search.\n"
-            + "Avilable materials based on request:\n"
-        )
+        error_string = "Too many results. Please refine your search.\n" + "Avilable materials based on request:\n"
         for _row, material in df.iterrows():
             error_string += _describe_material(material)
         raise LookupError(error_string)
@@ -287,9 +278,7 @@ def _find_unique_material(print_info: bool = False, **kwargs) -> pandas.Series:
         return material
 
 
-def _describe_material(
-    material: pandas.DataFrame | None = None, chemical_formula: str | None = None
-) -> str:
+def _describe_material(material: pandas.DataFrame | None = None, chemical_formula: str | None = None) -> str:
     """Describe material in a complete way.
 
     This function returns a string listing the properties of the given material
