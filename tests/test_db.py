@@ -12,9 +12,7 @@ def test_Co2Fe2H4():
     There is only one material with formula `Co2Fe2H4`, so this
     test should load its table without issues.
     """
-    properties = db.get_micromagnetic_properties(
-        chemical_formula="Co2Fe2H4", print_info=False
-    )
+    properties = db.get_micromagnetic_properties(chemical_formula="Co2Fe2H4", print_info=False)
     Ms_true = me.Ms(1190240.2412648, unit="A/m")
     Ku_true = me.Ku(2810000, unit="J/m3")
     assert Ms_true == properties.Ms_0
@@ -27,9 +25,7 @@ def test_Fe16N2():
     There is only one material with such formula in the database,
     so we test it with the values we know to be true.
     """
-    properties = db.get_micromagnetic_properties(
-        chemical_formula="Fe16N2", print_info=False
-    )
+    properties = db.get_micromagnetic_properties(chemical_formula="Fe16N2", print_info=False)
     Ms_true = me.Ms(1671126.902464901, unit="A/m")
     Ku_true = me.Ku(1100000, unit="J/m3")
     assert Ms_true == properties.Ms_0
@@ -53,9 +49,7 @@ def test_Co2Fe2H4_12():
     in the database, so we expect a `LookupError`.
     """
     with pytest.raises(LookupError):
-        db.get_micromagnetic_properties(
-            chemical_formula="Co2Fe2H4", space_group_number=12
-        )
+        db.get_micromagnetic_properties(chemical_formula="Co2Fe2H4", space_group_number=12)
 
 
 def test_all():
