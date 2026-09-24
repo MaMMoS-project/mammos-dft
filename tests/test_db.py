@@ -15,8 +15,8 @@ def test_Co2Fe2H4():
     properties = db.get_micromagnetic_properties(
         chemical_formula="Co2Fe2H4", print_info=False
     )
-    Ms_true = me.Ms(1190240.2412648, unit="A/m")
-    Ku_true = me.Ku(2810000, unit="J/m3")
+    Ms_true = me.Entity("SpontaneousMagnetization", 1190240.2412648, unit="A/m")
+    Ku_true = me.Entity("UniaxialAnisotropyConstant", 2810000, unit="J/m3")
     assert Ms_true == properties.Ms_0
     assert Ku_true == properties.Ku_0
 
@@ -30,8 +30,8 @@ def test_Fe16N2():
     properties = db.get_micromagnetic_properties(
         chemical_formula="Fe16N2", print_info=False
     )
-    Ms_true = me.Ms(1671126.902464901, unit="A/m")
-    Ku_true = me.Ku(1100000, unit="J/m3")
+    Ms_true = me.Entity("SpontaneousMagnetization", 1671126.902464901, unit="A/m")
+    Ku_true = me.Entity("UniaxialAnisotropyConstant", 1100000, unit="J/m3")
     assert Ms_true == properties.Ms_0
     assert Ku_true == properties.Ku_0
 

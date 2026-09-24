@@ -186,8 +186,8 @@ def get_micromagnetic_properties(
         OQMD_label=OQMD_label,
     )
     return MicromagneticProperties(
-        me.Ms(material.SpontaneousMagnetization),
-        me.Ku(material.UniaxialAnisotropyConstant),
+        me.Entity("SpontaneousMagnetization", material.SpontaneousMagnetization),
+        me.Entity("UniaxialAnisotropyConstant", material.UniaxialAnisotropyConstant),
     )
 
 
