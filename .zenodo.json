@@ -31,13 +31,6 @@
   "upload_type": "software",
   "license": "mit",
   "language": "eng",
-  "keywords": [
-    "density functional theory",
-    "ab initio",
-    "electronic structure",
-    "magnetic materials",
-    "MaMMoS"
-  ],
   "grants": [
     {
       "id": "10.13039/501100000780::101135546"
